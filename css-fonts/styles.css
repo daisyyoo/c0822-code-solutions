@@ -1,8 +1,9 @@
 body, h1, h2 {
   font-family: 'Satisfy', cursive;
-  font-family: 'Merriweather', serif;
+
 }
 
 p {
   line-height: 2em;
+  font-family: 'Merriweather', serif;
 }
