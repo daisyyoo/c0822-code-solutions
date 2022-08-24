@@ -6,6 +6,7 @@
 .button:hover {
   background-color: black;
   color: white;
+  cursor: pointer;
 }
 
 thead {
@@ -13,6 +14,6 @@ thead {
   color: white;
 }
 
-.odd {
+.table:nth-child(odd) {
   background-color: lightgrey;
 }
