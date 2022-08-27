@@ -7,29 +7,29 @@ body {
   justify-content: center;
 }
 
-.header {
+header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 810px;
+  width: 940px;
+  padding-right: 65px;
+  padding-left: 65px;
+  border-bottom: 1px solid #e4e3e3;
 }
 
 .logo {
-  width: 108px;
-}
-
-.row-border {
-  width: 100%;
-  height: 30px;
-  margin-bottom: 9px;
-
-  /* border: #c3c3c3;
-  border-width: 1px; */
+  width: 106px;
+  margin-top: 8px;
 }
 
 .header-nav {
-  padding-bottom: 16px;
-  padding-top: 10px;
+  padding-bottom: 6px;
+  padding-top: 6px;
+}
+
+nav ul {
+  margin-top: 16px;
+  margin-bottom: 15px;
 }
 
 li {
@@ -39,7 +39,7 @@ li {
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
-  color: #c3c3c3;
+  color: #b1b1b1;
 }
 
 .contact {
@@ -55,10 +55,11 @@ li {
   height: 400px;
   width: 810px;
   position: relative;
+  margin-top: 48px;
 }
 
 .overlay {
-  background: linear-gradient(rgb(29 27 27 / 30%), rgb(29 27 27 / 30%));
+  background: linear-gradient(rgb(107 105 105 / 45%), rgb(107 105 105 / 45%));
   width: 100%;
   height: 100%;
 }
@@ -84,7 +85,7 @@ p {
   font-style: normal;
   font-weight: 500;
   font-size: 11.8px;
-  line-height: 1.65em;
+  line-height: 1.7em;
   margin-bottom: 27px;
 }
 
@@ -95,7 +96,7 @@ input {
   font-size: 14.5px;
   color: white;
   background-color: #294464;
-  padding: 11px 35px;
+  padding: 11px 37px 11px 35px;
   border: transparent;
   border-radius: 3px;
 }
@@ -104,7 +105,7 @@ input {
   text-align: center;
   width: 950px;
   background-color: #fafafa;
-  margin-top: 76px;
+  margin-top: 48px;
   color: #6e6e6e;
 }
 
@@ -112,16 +113,16 @@ input {
   font-size: 22px;
   font-weight: 550;
   margin-bottom: 10px;
+  margin-top: 50px;
 }
 
 .bottom-mid {
   display: flex;
   width: 950px;
-  height: 230px;
+  height: 225px;
   background-color: #fafafa;
   color: #6e6e6e;
-
-  /* border-bottom: #edeef0; */
+  border-bottom: 1px solid #e6e7e7;
 }
 
 .bottom-mid p {
@@ -132,7 +133,7 @@ input {
 .half-column {
   flex-basis: 50%;
   text-align: center;
-  margin-top: 23px;
+  margin-top: 17px;
 }
 
 .left-column {
@@ -156,13 +157,14 @@ input {
 }
 
 .column-one h3 {
-  font-size: 22px;
+  font-size: 22.5px;
   font-weight: 550;
+  margin-top: 26px;
+  margin-bottom: 11px;
 }
 
 .column-two {
   padding-bottom: 15px;
-  margin-right: 1px;
 }
 
 .information {
@@ -170,13 +172,17 @@ input {
   display: flex;
   color: white;
   width: 943px;
-  padding-top: 87px;
-  padding-bottom: 84px;
+  padding-top: 84px;
+  padding-bottom: 81px;
 }
 
 .info-column-one {
   flex-basis: 50%;
-  padding-left: 65px;
+  padding-left: 66px;
+}
+
+.second-logo > img {
+  margin-top: 3px;
 }
 
 .address {
@@ -221,5 +227,6 @@ input {
 }
 
 .footer ul {
-  padding-left: 60px;
+  padding-left: 61px;
+  margin-top: 15px;
 }
