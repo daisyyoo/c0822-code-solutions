@@ -10,10 +10,11 @@ body {
 
 .row {
   display: flex;
+  justify-content: center;
 }
 
-.quarter-column {
-  flex-basis: 25%;
+.column-quarter {
+  flex-basis: 20%;
 }
 
 .phone-pic {
@@ -31,16 +32,17 @@ section {
 
 h2 {
   margin: 0;
-  padding: 1.5rem;
+  padding: 1rem;
+  font-size: 20px;
 }
 
 h3 {
   margin: 0;
-  padding: 0.8rem;
-  font-size: 16px;
+  padding: 0.5rem;
+  font-size: 14px;
 }
 
 p {
   padding-bottom: 24px;
-  font-size: 14px;
+  font-size: 10px;
 }
