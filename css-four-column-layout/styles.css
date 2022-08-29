@@ -8,12 +8,12 @@ body {
   margin: 0 auto;
 }
 
-.row {
+.main-content {
   display: flex;
   justify-content: center;
 }
 
-.column-quarter {
+.column-fifth {
   flex-basis: 20%;
 }
 
