@@ -8,8 +8,11 @@ body {
   margin: 0 auto;
 }
 
-.main-content {
+.row {
   display: flex;
+}
+
+.justify-center {
   justify-content: center;
 }
 
