@@ -1,0 +1,63 @@
+body {
+  font-family: Avenir, sans-serif;
+  color: #68594f;
+}
+
+.container {
+  background-color: #fbfbfb;
+}
+
+.row {
+  display: flex;
+}
+
+.full-column {
+  flex-basis: 100%;
+}
+
+.column-half {
+  flex-basis: 50%;
+}
+
+.column-third-quarter {
+  flex-basis: 75%;
+}
+
+.column-quarter {
+  flex-basis: 25%;
+}
+
+.justify-flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header-logo {
+  height: 1.75rem;
+}
+
+.nav-brand,
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.grandpa {
+  position: relative;
+}
+
+.grandpa-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url("images/product/product-header.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: brightness(85%) contrast(75%) saturate(95%);
+}
+
+header {
+  border-bottom: 1px solid rgb(231 233 236);
+}
