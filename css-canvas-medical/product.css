@@ -1,45 +1,59 @@
-body {
-  font-family: Avenir, sans-serif;
-  color: #68594f;
+.container {
+  max-width: 1130px;
+  margin: 0 auto;
 }
 
-.container {
-  background-color: #fbfbfb;
+body {
+  font-family: Avenir, sans-serif;
+  color: rgb(110 110 110);
+}
+
+h1,
+h2 {
+  font-family: "Tiempos Headline", sans-serif;
 }
 
 .row {
   display: flex;
 }
 
-.full-column {
+.column-full {
   flex-basis: 100%;
+}
+
+.column-three-quarter {
+  flex-basis: 75%;
 }
 
 .column-half {
   flex-basis: 50%;
 }
 
-.column-third-quarter {
-  flex-basis: 75%;
-}
-
 .column-quarter {
   flex-basis: 25%;
 }
 
-.justify-flex-end {
-  display: flex;
-  justify-content: flex-end;
+.align-center {
+  justify-content: center;
+  padding: 40px;
 }
 
-.header-logo {
+.nav-links {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
   height: 1.75rem;
 }
 
-.nav-brand,
-.nav-links {
-  display: flex;
-  align-items: center;
+li {
+  display: inline;
+  padding: 1.5rem;
+}
+
+.overview {
+  padding: 4.25rem;
 }
 
 .grandpa {
@@ -48,16 +62,23 @@ body {
 
 .grandpa-image {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   background-image: url("images/product/product-header.jpg");
   background-size: cover;
   background-position: center;
+  width: 90%;
   filter: brightness(85%) contrast(75%) saturate(95%);
 }
 
-header {
-  border-bottom: 1px solid rgb(231 233 236);
+.grandpa-content {
+  padding: 4.75rem;
+  position: relative;
+  color: white;
+}
+
+.grandpa-content p {
+  margin-bottom: 2rem;
+}
+
+.product-image {
+  width: 400px;
 }
