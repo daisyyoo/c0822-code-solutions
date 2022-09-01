@@ -15,10 +15,3 @@ function countdown(number) {
   }
   return output;
 }
-
-// - make a variable for the sum
-// - find the value of the first number in the array and add to sum
-// - increment the location of each number of the array
-// - add the value of that number to the sum
-// - keep going until you reach the last number in the array
-// - return sum
