@@ -1,17 +1,15 @@
 /* exported getWords */
 
-// make new array container
-// evaluate the string starting from the first value and check if it's a space
-// if so, then separate/split and in array via split method
-// if no space, then return empty array
+// compare if the length of string is less or equal to 0 to check for empty strings
+// which should return an empty array
+// if the length is larger than 0
+// divide the string at every space and return output
 
 function getWords(string) {
-  for (var i = 0; i < string.length; i++) {
-    if (string[i] === ' ') {
-      string.split(' ');
+  for (var i = 0; i <= string.length; i++) {
+    if (string.length <= 0) {
+      return [];
     }
   }
-  var newArray = [];
-  newArray.push(string);
-  return newArray;
+  return string.split(' ');
 }
