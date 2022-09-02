@@ -6,10 +6,8 @@
 // divide the string at every space and return output
 
 function getWords(string) {
-  for (var i = 0; i <= string.length; i++) {
-    if (string.length <= 0) {
-      return [];
-    }
+  if (string.length <= 0) {
+    return [];
   }
   return string.split(' ');
 }
