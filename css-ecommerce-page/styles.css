@@ -19,9 +19,12 @@ body {
 }
 
 .column-fifth {
+  flex-basis: 20%;
+}
+
+.column-align {
   display: flex;
   flex-direction: column;
-  flex-basis: 20%;
 }
 
 .align-center {
