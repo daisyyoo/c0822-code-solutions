@@ -21,6 +21,7 @@ function capitalizeWords(string) {
       newString += lowercase[i];
     } else {
       newString += newValue[i];
+      newValue = lowercase;
     }
   }
   return newString;
