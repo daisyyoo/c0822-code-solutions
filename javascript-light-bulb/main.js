@@ -1,14 +1,18 @@
-var $clickBackground = document.querySelector('.background-color');
-var $clickLightbulb = document.querySelector('.lightbulb');
+var $background = document.querySelector('.background-color');
+var $lightbulb = document.querySelector('.lightbulb');
+var lightOn = true;
 
 function clickOn(event) {
-  if ($clickLightbulb.className === 'lightbulb-off') {
-    $clickBackground.className = 'column-full background-color';
-    $clickLightbulb.className = 'lightbulb';
-  } else if ($clickLightbulb.className === 'lightbulb') {
-    $clickBackground.className = 'column-full background-color-off';
-    $clickLightbulb.className = 'lightbulb-off';
+  if (lightOn === true) {
+    $background.className = 'column-full background-color-off';
+    $lightbulb.className = 'lightbulb-off';
+    lightOn = false;
+  } else if (lightOn === false) {
+    var $lightbulbOff = document.querySelector('.lightbulb-off');
+    $background.className = 'column-full background-color';
+    $lightbulbOff.className = 'lightbulb';
+    lightOn = true;
   }
 }
 
-$clickLightbulb.addEventListener('click', clickOn);
+$lightbulb.addEventListener('click', clickOn);
