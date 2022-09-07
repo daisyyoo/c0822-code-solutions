@@ -1,0 +1,44 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 900px;
+}
+
+.modal-button {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
+
+.dark-background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: darkgrey;
+  width: 900px;
+  height: 500px;
+  margin: 0;
+
+  /* display: none;
+  Use this when clicking button */
+}
+
+.survey-box {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  padding: 15px;
+  border: white;
+  border-radius: 5px;
+}
+
+.no {
+  margin: 10px auto;
+}
+
+h2 {
+  font-weight: 600;
+}
