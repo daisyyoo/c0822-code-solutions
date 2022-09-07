@@ -73,7 +73,8 @@ function renderPokemon(pokemon) {
   number.textContent = pokemon.number;
   var description = pokemonText.appendChild(document.createElement('p'));
   description.textContent = pokemon.description;
-  $columnThird.appendChild(div);
+  var output = $columnThird.appendChild(div);
+  return output;
 }
 
 var row = document.querySelector('.row');
