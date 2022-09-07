@@ -9,22 +9,21 @@ function handleBlur(event) {
 }
 
 function handleInput(event) {
-  console.log('event.target.name', event.target.name);
-  console.log('event.target.value', event.target.value);
-// console.log('value of', event.target.name + ':', event.target.value);
+  console.log('value of', event.target.name + ':', event.target.value);
 }
 
 var $focusInput = document.querySelector('#user-name');
 var $blurInput = document.querySelector('#user-email');
 var $inputInput = document.querySelector('#user-message');
-$focusInput.addEventListener('focus', handleFocus);
-$focusInput.addEventListener('focus', handleFocus);
-$focusInput.addEventListener('focus', handleFocus);
 
-$blurInput.addEventListener('blur', handleBlur);
-$blurInput.addEventListener('blur', handleBlur);
-$blurInput.addEventListener('blur', handleBlur);
+$focusInput.addEventListener('focus', handleFocus);
+$focusInput.addEventListener('blur', handleBlur);
+$focusInput.addEventListener('input', handleInput);
 
-$inputInput.addEventListener('input', handleInput);
-$inputInput.addEventListener('input', handleInput);
+$blurInput.addEventListener('focus', handleFocus);
+$blurInput.addEventListener('blur', handleBlur);
+$blurInput.addEventListener('input', handleInput);
+
+$inputInput.addEventListener('focus', handleFocus);
+$inputInput.addEventListener('blur', handleBlur);
 $inputInput.addEventListener('input', handleInput);
