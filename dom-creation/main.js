@@ -58,8 +58,6 @@ var pokedex = [
 ];
 
 function renderPokemon(pokemon) {
-  var $columnThird = document.querySelector('.row');
-
   var div = document.createElement('div');
   div.setAttribute('class', 'column-third');
 
@@ -81,8 +79,7 @@ function renderPokemon(pokemon) {
   var description = pokemonText.appendChild(document.createElement('p'));
   description.textContent = pokemon.description;
 
-  var output = $columnThird.appendChild(div);
-  return output;
+  return div;
 }
 
 var row = document.querySelector('.row');
