@@ -1,0 +1,50 @@
+body {
+  font-family: Arvo, serif;
+}
+
+.container {
+  width: 1000px;
+  height: 800px;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.column-full {
+  display: flex;
+}
+
+.align-content {
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  white-space: pre;
+  display: flex;
+  flex-direction: row;
+}
+
+span {
+  margin: 0.2rem;
+}
+
+.no-type {
+  color: black;
+}
+
+.border {
+  border-bottom: 0.2rem solid black;
+}
+
+.correct-letter {
+  color: green;
+}
+
+.incorrect-letter {
+  color: red;
+  border-bottom: 0.2rem solid red;
+}
