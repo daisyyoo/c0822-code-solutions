@@ -8,11 +8,11 @@
 
 function lastChars(length, string) {
   var newString = '';
-  for (var i = string.length - length; i < string.length; i++) {
-    if (length < string.length) {
+  if (length > string.length) {
+    return string;
+  } else {
+    for (var i = string.length - length; i < string.length; i++) {
       newString += string[i];
-    } else {
-      return string;
     }
   }
   return newString;

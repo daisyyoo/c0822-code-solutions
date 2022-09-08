@@ -8,11 +8,11 @@
 
 function firstChars(length, string) {
   var newString = '';
-  for (var i = 0; i < length; i++) {
-    if (length < string.length) {
+  if (length > string.length) {
+    return string;
+  } else {
+    for (var i = 0; i < length; i++) {
       newString += string[i];
-    } else {
-      return string;
     }
   }
   return newString;
