@@ -1,14 +1,10 @@
 body {
-  margin: 0 auto;
+  margin: 0;
   font-family: Arial, sans-serif;
 }
 
 .container {
   max-width: 900px;
-}
-
-.background {
-  position: fixed;
 }
 
 .open-button {
@@ -29,13 +25,14 @@ body {
 }
 
 .dark-background {
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #323232;
   width: 1000px;
   height: 700px;
-  margin: 0;
+  top: 0;
 }
 
 .align-content {
