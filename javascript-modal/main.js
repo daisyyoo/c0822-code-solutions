@@ -2,7 +2,7 @@ var $openButton = document.querySelector('.open-button');
 var $noButton = document.querySelector('.no');
 var $backgroundClosed = document.querySelector('.dark-background-closed');
 var $surveyBoxClosed = document.querySelector('.survey-box-closed align-content');
-var survey = false;
+var survey = true;
 
 function fillSurvey(event) {
   event.preventDefault();
