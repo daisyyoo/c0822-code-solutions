@@ -9,17 +9,18 @@
 
 function defaults(target, source) {
   for (var keys in target) {
-    var propertyTarget = keys;
+    var targetKey = keys;
     for (var property in source) {
-      var propertySource = property;
-      if (target[property] === {}) {
-        target = source;
-      } else if (propertySource !== propertyTarget) {
-        target[propertySource] = source[propertySource];
-        break;
-      } else {
-        break;
+      var sourceProperty = property;
+      if (sourceProperty === targetKey) {
+        source[sourceProperty] = target[targetKey];
       }
     }
+  }
+  target[sourceProperty] = source[sourceProperty];
+  if (property === undefined) {
+    return {};
+  } else if (keys === undefined) {
+    target = source; // have to add to the correct order so they do it after exiting for loop with undefined values
   }
 }
