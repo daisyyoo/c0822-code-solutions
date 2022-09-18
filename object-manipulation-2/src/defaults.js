@@ -7,20 +7,16 @@
 // then add it into the target object
 // if not, then move on
 
-function defaults(target, source) {
-  for (var keys in target) {
-    var targetKey = keys;
-    for (var property in source) {
-      var sourceProperty = property;
-      if (sourceProperty === targetKey) {
-        source[sourceProperty] = target[targetKey];
-      }
-    }
-  }
-  target[sourceProperty] = source[sourceProperty];
-  if (property === undefined) {
-    return {};
-  } else if (keys === undefined) {
-    target = source; // have to add to the correct order so they do it after exiting for loop with undefined values
-  }
-}
+// function defaults(target, source) {
+//   for (key in source) {
+//     for (var i = 0; i < Object.keys.length; i++) {
+//       if (key !== Object.keys(target)[i]) {
+//         source[key] = target[key];
+//         target[key] = source[key];
+//       } else if (source[key] !== target[key]) {
+//         source[key] = target[key];
+//         target[key] = source[key];
+//       }
+//     }
+//   }
+// }
