@@ -2,15 +2,12 @@
 var student = {
   firstName: 'Daisy',
   getFirstName: function () {
-    return this;
   },
   lastName: 'Yoo',
   getLastName: function () {
-    return this;
   },
   subject: 'JavaScript',
   getSubject: function () {
-    return this;
   },
   getFullName:
     function () {
