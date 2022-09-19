@@ -7,16 +7,16 @@
 // then add it into the target object
 // if not, then move on
 
-// function defaults(target, source) {
-//   for (key in source) {
-//     for (var i = 0; i < Object.keys.length; i++) {
-//       if (key !== Object.keys(target)[i]) {
-//         source[key] = target[key];
-//         target[key] = source[key];
-//       } else if (source[key] !== target[key]) {
-//         source[key] = target[key];
-//         target[key] = source[key];
-//       }
-//     }
-//   }
-// }
+function defaults(target, source) {
+  // debugger;
+  for (var key in source) {
+    for (var i = 0; i < Object.keys.length; i++) {
+      if (key !== Object.keys(target)[i]) {
+        if (source[key] !== target[key]) {
+          // source[key] = target[key];
+          target[key] = source[key];
+        }
+      }
+    }
+  }
+}
