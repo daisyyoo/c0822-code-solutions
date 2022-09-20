@@ -25,6 +25,14 @@ body {
   flex-direction: column;
 }
 
+i {
+  font-size: 3rem;
+}
+
+.image-nav > i {
+  font-size: 1.5rem;
+}
+
 .hidden {
   display: none;
 }
