@@ -1,13 +1,15 @@
-setInterval(countdown, 1000);
+var number = 4;
+var countdownID = null;
+var $header = document.querySelector('h1');
 
 function countdown() {
-  var $header = document.querySelector('h1');
-  var number = parseInt($header.textContent);
-  if (number > 1) {
-    number--;
-    var numberString = number.toString();
-    $header.textContent = numberString;
-  } else if (number === 1) {
+  number--;
+  if (number > 0) {
+    $header.textContent = number;
+  } else {
     $header.textContent = '~Earth Beeeelooowww Us~';
+    clearInterval(countdownID);
   }
 }
+
+countdownID = setInterval(countdown, 1000);
