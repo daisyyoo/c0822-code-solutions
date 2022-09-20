@@ -1,7 +1,6 @@
 /* exported Account */
 function Account(number, holder) {
   this.number = number;
-  number++;
   if (typeof holder === 'string') {
     this.holder = holder;
   }
