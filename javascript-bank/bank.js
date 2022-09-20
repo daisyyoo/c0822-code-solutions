@@ -19,9 +19,23 @@ Bank.prototype.openAccount = function (holder, balance) {
 };
 
 Bank.prototype.getAccount = function (number) {
-
+  for (var i = 0; i < this.accounts.length; i++) {
+    if (number === this.accounts[i].number) {
+      var findAccount = this.accounts[i];
+      return findAccount;
+    }
+  }
+  return null;
 };
 
 Bank.prototype.getTotalAssets = function () {
-
+  if (this.accounts.length === 0) {
+    return 0;
+  } else {
+    var totalAssets = 0;
+    for (var i = 0; i < this.accounts.length; i++) {
+      totalAssets += this.accounts[i].getBalance(this.accounts[i]);
+    }
+    return totalAssets;
+  }
 };
