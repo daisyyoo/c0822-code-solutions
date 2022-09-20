@@ -8,15 +8,9 @@
 // if not, then move on
 
 function defaults(target, source) {
-  // debugger;
   for (var key in source) {
-    for (var i = 0; i < Object.keys.length; i++) {
-      if (key !== Object.keys(target)[i]) {
-        if (source[key] !== target[key]) {
-          // source[key] = target[key];
-          target[key] = source[key];
-        }
-      }
+    if (!(key in target)) {
+      target[key] = source[key];
     }
   }
 }
