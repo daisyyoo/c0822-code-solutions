@@ -1,5 +1,6 @@
 /* exported isPalindromic */
 
+// make original string into a new string with no spaces first via method mentioned below
 // make a new empty string
 // check to see if the character in the string is a letter or not
 // if it is, concatenate into the new string
