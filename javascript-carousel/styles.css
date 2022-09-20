@@ -24,3 +24,7 @@ body {
 .column-direction {
   flex-direction: column;
 }
+
+.hidden {
+  display: none;
+}
