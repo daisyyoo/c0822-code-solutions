@@ -1,10 +1,8 @@
 /* exported Account */
 function Account(number, holder) {
-  if (number > 0) {
-    this.number = number;
-    number++;
-  }
-  if (typeof holder === typeof '') {
+  this.number = number;
+  number++;
+  if (typeof holder === 'string') {
     this.holder = holder;
   }
   this.transactions = [];
