@@ -15,11 +15,11 @@ function reverseWords(string) {
       if (j > 0) {
         var newString = '';
         newString += stringArray[i][j];
-      } else if (j === 0 && i !== stringArray.length - 1) {
+      } else if (j === 0) {
         newString = stringArray[i][j] + ' ';
       }
       finalString += newString;
     }
   }
-  return finalString;
+  return finalString.trim();
 }
