@@ -9,44 +9,43 @@
 // API === API
 
 function titleCase(title) {
-  // var specialArray = ['and', 'or', 'nor', 'but', 'a', 'an', 'the', 'as', 'at', 'by', 'for', 'in', 'of', 'on', 'per', 'to'];
+  var specialArray = ['and', 'or', 'nor', 'but', 'a', 'an', 'the', 'as', 'at', 'by', 'for', 'in', 'of', 'on', 'per', 'to'];
   var finalString = '';
   var titleLowerCase = title.toLowerCase();
   var titleArray = titleLowerCase.split(' ');
 
-  // if (titleArray[i] === 'javascript') {
-  //   //replace 'Javascript' with 'JavaScript'
-  // }
-
-  // if (titleArray[i] === 'api') {
-  //   //replace 'api' with 'API'
-  // }
-
-  // if (titleArray[i].length < 3 && titleArray[i] in specialArray))
-  // keep lowercase
-
-  // if (titleArray[i].length > 3)
-  // capitalize
-
-  //   if (specialArray.includes(titleArray[i]) {
-  //     //capitalize
-  //   } else if ( ) {
-  //     //follows after colon or hyphen
-  //     //capitalize
-  //   }
-
   for (var i = 0; i < titleArray.length; i++) {
-    for (var j = 0; j < titleArray[i].length; j++) {
-      var newString = '';
-      if (j === 0) {
-        newString += titleArray[i][j].toUpperCase();
-      } else {
-        newString += titleArray[i][j];
+    if (titleArray[i] === 'api') {
+      var apiValue = titleArray[i];
+      apiValue = 'API';
+      finalString += apiValue;
+    } else if (titleArray[i] === 'javascript:') {
+      var javaColon = titleArray[i];
+      javaColon = 'JavaScript: ';
+      finalString += javaColon;
+    } else if (titleArray[i] === 'javascript') {
+      var javascript = titleArray[i];
+      javascript = 'JavaScript ';
+      finalString += javascript;
+    } else if (titleArray[i].length < 3) {
+      var smallWord = titleArray[i];
+      if (smallWord[0] !== titleLowerCase[0]) {
+        for (var j = 0; j < specialArray.length; j++) {
+          // find where the smaller words are either disappearing to or
+          // why they're getting capitalized when they shouldn't be and vice versa
+          if (smallWord !== specialArray[j]) {
+            var capSmallWord = smallWord.replace(smallWord[0], smallWord[0].toUpperCase());
+            smallWord = capSmallWord;
+          }
+        }
+        smallWord = smallWord + ' ';
+        finalString += smallWord;
       }
-
-      finalString += newString;
+    } else if (titleArray[i][0]) {
+      var capitalized = titleArray[i].replace(titleArray[i][0], titleArray[i][0].toUpperCase());
+      var wordWithSpace = capitalized + ' ';
+      finalString += wordWithSpace;
     }
-    finalString += ' ';
   }
   return finalString.trim();
 }
