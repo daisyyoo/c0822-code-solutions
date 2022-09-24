@@ -28,15 +28,16 @@ function titleCase(title) {
       javascript = 'JavaScript ';
       finalString += javascript;
     } else if (titleArray[i].length < 3) {
+      // debugger;
       var smallWord = titleArray[i];
       if (smallWord[0] !== titleLowerCase[0]) {
         for (var j = 0; j < specialArray.length; j++) {
-          // find where the smaller words are either disappearing to or
-          // why they're getting capitalized when they shouldn't be and vice versa
-          if (smallWord !== specialArray[j]) {
-            var capSmallWord = smallWord.replace(smallWord[0], smallWord[0].toUpperCase());
-            smallWord = capSmallWord;
+          if (smallWord === specialArray[j]) {
+            smallWord = smallWord + ' ';
           }
+          // this has to fit here somewhere since it's the same conditional, but i can't figure out where...
+          var capSmallWord = smallWord.replace(smallWord[0], smallWord[0].toUpperCase());
+          smallWord = capSmallWord;
         }
         smallWord = smallWord + ' ';
         finalString += smallWord;
