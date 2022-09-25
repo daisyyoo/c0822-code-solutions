@@ -9,44 +9,40 @@
 // API === API
 
 function titleCase(title) {
+  // debugger;
   var specialArray = ['and', 'or', 'nor', 'but', 'a', 'an', 'the', 'as', 'at', 'by', 'for', 'in', 'of', 'on', 'per', 'to'];
-  var finalString = '';
   var titleLowerCase = title.toLowerCase();
-  var titleArray = titleLowerCase.split(' ');
-
-  for (var i = 0; i < titleArray.length; i++) {
-    if (titleArray[i] === 'api') {
-      var apiValue = titleArray[i];
-      apiValue = 'API';
-      finalString += apiValue;
-    } else if (titleArray[i] === 'javascript:') {
-      var javaColon = titleArray[i];
-      javaColon = 'JavaScript: ';
-      finalString += javaColon;
-    } else if (titleArray[i] === 'javascript') {
-      var javascript = titleArray[i];
-      javascript = 'JavaScript ';
-      finalString += javascript;
-    } else if (titleArray[i].length < 3) {
-      // debugger;
-      var smallWord = titleArray[i];
-      if (smallWord[0] !== titleLowerCase[0]) {
-        for (var j = 0; j < specialArray.length; j++) {
-          if (smallWord === specialArray[j]) {
-            smallWord = smallWord + ' ';
-          }
-          // this has to fit here somewhere since it's the same conditional, but i can't figure out where...
-          var capSmallWord = smallWord.replace(smallWord[0], smallWord[0].toUpperCase());
-          smallWord = capSmallWord;
-        }
-        smallWord = smallWord + ' ';
-        finalString += smallWord;
+  titleLowerCase = titleLowerCase.replace(titleLowerCase[0], titleLowerCase[0].toUpperCase());
+  for (var i = 0; i < titleLowerCase.length; i++) {
+    if (titleLowerCase.includes('api')) {
+      titleLowerCase = titleLowerCase.replace('api', 'API');
+    } else if (titleLowerCase.includes('javascript')) {
+      titleLowerCase = titleLowerCase.replace('javascript', 'JavaScript');
+    } else if (titleLowerCase[i] === '-') {
+      titleLowerCase = titleLowerCase.replace(titleLowerCase[i + 1], titleLowerCase[i + 1].toUpperCase());
+    } else if (titleLowerCase[i] === ' ') {
+      titleLowerCase = titleLowerCase.replace(titleLowerCase.charAt([i + 1]), titleLowerCase.charAt([i + 1]).toUpperCase());
+    }
+    for (var j = 0; j < specialArray.length; j++) {
+      var capSpecialWord = specialArray[j].replace(specialArray[j][0], specialArray[j][0].toUpperCase());
+      if (titleLowerCase.includes(capSpecialWord)) {
+        titleLowerCase.replace(capSpecialWord, capSpecialWord.replace(capSpecialWord[j][0], capSpecialWord[j].toLowerCase()));
       }
-    } else if (titleArray[i][0]) {
-      var capitalized = titleArray[i].replace(titleArray[i][0], titleArray[i][0].toUpperCase());
-      var wordWithSpace = capitalized + ' ';
-      finalString += wordWithSpace;
     }
   }
-  return finalString.trim();
+  return titleLowerCase;
 }
+
+// if (smallWord[0] !== titleLowerCase[0]) {
+//   for (var j = 0; j < specialArray.length; j++) {
+//     if (titleArray[i] === specialArray[j]) {
+//       smallWord = smallWord.toLowerCase();
+//     }
+//     smallWord = smallWord.replace(smallWord[0], smallWord[0].toUpperCase());
+//   }
+//   smallWord = smallWord + ' ';
+//   finalString += smallWord;
+// } else {
+//   var firstSmallWord = smallWord.replace(smallWord[0], smallWord[0].toUpperCase());
+//   smallWord = firstSmallWord + ' ';
+//   finalString += smallWord;
