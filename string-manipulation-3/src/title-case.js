@@ -32,17 +32,3 @@ function titleCase(title) {
   }
   return titleLowerCase;
 }
-
-// if (smallWord[0] !== titleLowerCase[0]) {
-//   for (var j = 0; j < specialArray.length; j++) {
-//     if (titleArray[i] === specialArray[j]) {
-//       smallWord = smallWord.toLowerCase();
-//     }
-//     smallWord = smallWord.replace(smallWord[0], smallWord[0].toUpperCase());
-//   }
-//   smallWord = smallWord + ' ';
-//   finalString += smallWord;
-// } else {
-//   var firstSmallWord = smallWord.replace(smallWord[0], smallWord[0].toUpperCase());
-//   smallWord = firstSmallWord + ' ';
-//   finalString += smallWord;
