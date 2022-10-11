@@ -1,112 +1,73 @@
-var imageNum = 0;
+var currentIndex = 0;
+var newIndex = 1;
 var countdownID = null;
-var $images = document.querySelectorAll('img');
+var circlesAll = document.querySelectorAll('.fa-circle');
+var imagesAll = document.querySelectorAll('img');
 var $chevronRight = document.querySelector('.chevron-right');
 var $chevronLeft = document.querySelector('.chevron-left');
-var $circle0 = document.querySelector('.circle-0');
-var $circle1 = document.querySelector('.circle-1');
-var $circle2 = document.querySelector('.circle-2');
-var $circle3 = document.querySelector('.circle-3');
-var $circle4 = document.querySelector('.circle-4');
 var $circlesAll = document.querySelectorAll('.image-nav > i');
 
-function countdown() {
-  if (imageNum < 4) {
-    $images[imageNum].className = 'hidden';
-    $circlesAll[imageNum].className = 'fa-regular fa-circle';
-    imageNum++;
-    $images[imageNum].className = 'show';
-    $circlesAll[imageNum].className = 'fa-solid fa-circle';
-  } else if (imageNum === 4) {
-    $images[imageNum].className = 'hidden';
-    $circlesAll[imageNum].className = 'fa-regular fa-circle';
-    imageNum = 0;
-    $images[imageNum].className = 'show';
-    $circlesAll[imageNum].className = 'fa-solid fa-circle';
+$chevronRight.addEventListener('click', goRight);
+$chevronLeft.addEventListener('click', goLeft);
+$circlesAll.addEventListener('click', circleClick);
+
+function circleClick(event) {
+  if (event.target.matches('i')) {
+    // show which one it clicked and highlighted
   }
 }
 
-countdownID = setInterval(countdown, 3000);
-
-function clickRight() {
-  countdown();
-  clearInterval(countdownID);
-  countdownID = setInterval(countdown, 3000);
-}
-
-function clickLeft() {
-  if (imageNum > 0 && imageNum <= 4) {
-    $images[imageNum].className = 'hidden';
-    $circlesAll[imageNum].className = 'fa-regular fa-circle';
-    imageNum--;
-    $images[imageNum].className = 'show';
-    $circlesAll[imageNum].className = 'fa-solid fa-circle';
-  } else if (imageNum === 0) {
-    $images[imageNum].className = 'hidden';
-    $circlesAll[imageNum].className = 'fa-regular fa-circle';
-    imageNum = 4;
-    $images[imageNum].className = 'show';
-    $circlesAll[imageNum].className = 'fa-solid fa-circle';
+function showIndex(newIndex) {
+  for (var i = 0; i < circlesAll.length; i++) {
+    if (i === newIndex) {
+      circlesAll[newIndex].className = 'fa-solid fa-circle';
+      imagesAll[newIndex].className = 'show';
+    } else {
+      circlesAll[i].className = 'fa-regular fa-circle';
+      imagesAll[i].className = 'hidden';
+    }
   }
-  clearInterval(countdownID);
-  countdownID = setInterval(countdown, 3000);
 }
 
-$circle0.addEventListener('click', goToImg0);
-$circle1.addEventListener('click', goToImg1);
-$circle2.addEventListener('click', goToImg2);
-$circle3.addEventListener('click', goToImg3);
-$circle4.addEventListener('click', goToImg4);
-
-function goToImg0() {
-  $images[imageNum].className = 'hidden';
-  $circlesAll[imageNum].className = 'fa-regular fa-circle';
-  imageNum = 0;
-  $images[imageNum].className = 'show';
-  $circlesAll[imageNum].className = 'fa-solid fa-circle';
-  clearInterval(countdownID);
-  countdownID = setInterval(countdown, 3000);
+function showNextIndex() {
+  if (currentIndex < 4) {
+    newIndex++;
+    currentIndex++;
+  } else if (currentIndex === 4) {
+    newIndex = 0;
+    currentIndex = 0;
+  }
+  return newIndex;
 }
 
-function goToImg1() {
-  $images[imageNum].className = 'hidden';
-  $circlesAll[imageNum].className = 'fa-regular fa-circle';
-  imageNum = 1;
-  $images[imageNum].className = 'show';
-  $circlesAll[imageNum].className = 'fa-solid fa-circle';
-  clearInterval(countdownID);
-  countdownID = setInterval(countdown, 3000);
+function showPreviousIndex() {
+  if (currentIndex > 0) {
+    newIndex--;
+    currentIndex--;
+  } else if (currentIndex === 0) {
+    newIndex = 4;
+    currentIndex = 4;
+  }
+  return newIndex;
 }
 
-function goToImg2() {
-  $images[imageNum].className = 'hidden';
-  $circlesAll[imageNum].className = 'fa-regular fa-circle';
-  imageNum = 2;
-  $images[imageNum].className = 'show';
-  $circlesAll[imageNum].className = 'fa-solid fa-circle';
-  clearInterval(countdownID);
-  countdownID = setInterval(countdown, 3000);
+function imageCarousel() {
+  var nextIndex = showNextIndex();
+  showIndex(nextIndex);
 }
 
-function goToImg3() {
-  $images[imageNum].className = 'hidden';
-  $circlesAll[imageNum].className = 'fa-regular fa-circle';
-  imageNum = 3;
-  $images[imageNum].className = 'show';
-  $circlesAll[imageNum].className = 'fa-solid fa-circle';
+function goRight(event) {
+  var nextIndex = showNextIndex();
+  showIndex(nextIndex);
   clearInterval(countdownID);
-  countdownID = setInterval(countdown, 3000);
+  countdownID = showNextIndex(goRight, 3000);
 }
 
-function goToImg4() {
-  $images[imageNum].className = 'hidden';
-  $circlesAll[imageNum].className = 'fa-regular fa-circle';
-  imageNum = 4;
-  $images[imageNum].className = 'show';
-  $circlesAll[imageNum].className = 'fa-solid fa-circle';
+function goLeft(event) {
+  var newIndex = showPreviousIndex();
+  showIndex(newIndex);
   clearInterval(countdownID);
-  countdownID = setInterval(countdown, 3000);
+  countdownID = showNextIndex(goRight, 3000);
 }
 
-$chevronRight.addEventListener('click', clickRight);
-$chevronLeft.addEventListener('click', clickLeft);
+countdownID = showNextIndex(imageCarousel, 3000);
