@@ -5,15 +5,15 @@ var circlesAll = document.querySelectorAll('.fa-circle');
 var imagesAll = document.querySelectorAll('img');
 var $chevronRight = document.querySelector('.chevron-right');
 var $chevronLeft = document.querySelector('.chevron-left');
-var $circlesAll = document.querySelectorAll('.image-nav > i');
+var $circleNav = document.querySelector('.image-nav');
 
 $chevronRight.addEventListener('click', goRight);
 $chevronLeft.addEventListener('click', goLeft);
-$circlesAll.addEventListener('click', circleClick);
+$circleNav.addEventListener('click', circleClick);
 
 function circleClick(event) {
   if (event.target.matches('i')) {
-    // show which one it clicked and highlighted
+    event.target.closest('i').className = 'show';
   }
 }
 
@@ -30,44 +30,47 @@ function showIndex(newIndex) {
 }
 
 function showNextIndex() {
-  if (currentIndex < 4) {
+  if (currentIndex >= 0 && currentIndex < 3) {
     newIndex++;
     currentIndex++;
-  } else if (currentIndex === 4) {
+  } else if (currentIndex === 3) {
     newIndex = 0;
+    currentIndex++;
+  } else if (currentIndex === 4) {
+    newIndex++;
     currentIndex = 0;
   }
-  return newIndex;
 }
 
 function showPreviousIndex() {
-  if (currentIndex > 0) {
+  if (currentIndex >= 1 && currentIndex < 4) {
     newIndex--;
     currentIndex--;
-  } else if (currentIndex === 0) {
+  } else if (currentIndex === 4) {
     newIndex = 4;
+    currentIndex--;
+  } else if (currentIndex === 0) {
+    newIndex--;
     currentIndex = 4;
   }
-  return newIndex;
 }
-
 function imageCarousel() {
-  var nextIndex = showNextIndex();
-  showIndex(nextIndex);
+  showIndex(newIndex);
+  showNextIndex();
 }
 
 function goRight(event) {
-  var nextIndex = showNextIndex();
-  showIndex(nextIndex);
   clearInterval(countdownID);
-  countdownID = showNextIndex(goRight, 3000);
+  showIndex(newIndex);
+  showNextIndex();
+  countdownID = setInterval(imageCarousel, 3000);
 }
 
 function goLeft(event) {
-  var newIndex = showPreviousIndex();
-  showIndex(newIndex);
   clearInterval(countdownID);
-  countdownID = showNextIndex(goRight, 3000);
+  showPreviousIndex();
+  showIndex(currentIndex);
+  countdownID = setInterval(imageCarousel, 3000);
 }
 
-countdownID = showNextIndex(imageCarousel, 3000);
+countdownID = setInterval(imageCarousel, 3000);
