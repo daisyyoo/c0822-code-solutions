@@ -13,7 +13,8 @@ $circleNav.addEventListener('click', circleClick);
 
 function circleClick(event) {
   if (event.target.matches('i')) {
-    event.target.closest('i').className = 'show';
+    newIndex = Number(event.target.closest('i').getAttribute('id'));
+    showIndex(newIndex);
   }
 }
 
