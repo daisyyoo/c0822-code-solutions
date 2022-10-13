@@ -1,0 +1,39 @@
+body {
+  max-width: 900px;
+}
+
+.container {
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+}
+
+.column-third {
+  flex-basis: calc (100%/3);
+  width: 100%;
+}
+
+.align-spacing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.column-direction {
+  flex-direction: column;
+}
+
+i {
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.image-nav > i {
+  font-size: 1.5rem;
+}
+
+.hidden {
+  display: none;
+}
