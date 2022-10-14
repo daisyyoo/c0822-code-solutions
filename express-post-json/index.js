@@ -12,7 +12,6 @@ app.get('/api/grades', (req, res) => {
 app.use(express.json());
 
 app.post('/api/grades', (req, res) => {
-  // grades[nextId] = Number(nextId);
   grades = req.body;
   grades.id = nextId;
   arrayResponse.push(grades);
