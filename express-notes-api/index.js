@@ -50,20 +50,31 @@ const jsonMiddleware = express.json();
 app.use(jsonMiddleware);
 
 app.post('/api/notes', (req, res) => {
-  fs.writeFile('./data.json', JSON.stringify(dataObject, null, 2), err => {
+  const errId = { error: '' };
+  fs.writeFile('.derp/data.json', JSON.stringify(dataObject, null, 2), err => {
     if (err) {
       console.error(err);
+      res.status(500);
+      errId.error = 'An unexpected error occurred.';
+      res.send(errId);
       process.exit(1);
     }
-
     const newContent = req.body;
-    const id = dataObject.nextId;
-    dataObject.notes[id] = newContent;
-    dataObject.notes[id].id = id;
-    dataObject.nextId++;
-    res.status(201);
-    res.json(dataObject.notes[id]);
-    res.send();
+    for (const key in newContent) {
+      if (key !== 'content') {
+        res.status(400);
+        errId.error = 'content is a required field';
+        res.send(errId);
+      } else if (key === 'content') {
+        const id = dataObject.nextId;
+        dataObject.notes[id] = newContent;
+        dataObject.notes[id].id = id;
+        dataObject.nextId++;
+        res.status(201);
+        res.json(dataObject.notes[id]);
+        res.send();
+      }
+    }
   });
 });
 
