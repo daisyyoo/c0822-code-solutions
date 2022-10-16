@@ -46,6 +46,27 @@ app.get('/api/notes/:id', (req, res, next) => {
   });
 });
 
+const jsonMiddleware = express.json();
+app.use(jsonMiddleware);
+
+app.post('/api/notes', (req, res) => {
+  fs.writeFile('./data.json', JSON.stringify(dataObject, null, 2), err => {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+
+    const newContent = req.body;
+    const id = dataObject.nextId;
+    dataObject.notes[id] = newContent;
+    dataObject.notes[id].id = id;
+    dataObject.nextId++;
+    res.status(201);
+    res.json(dataObject.notes[id]);
+    res.send();
+  });
+});
+
 app.listen(3000, () => {
   // eslint-disable-next-line no-console
   console.log('Listening on port 3000!');
