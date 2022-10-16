@@ -51,7 +51,7 @@ app.use(jsonMiddleware);
 
 app.post('/api/notes', (req, res) => {
   const errId = { error: '' };
-  fs.writeFile('.derp/data.json', JSON.stringify(dataObject, null, 2), err => {
+  fs.writeFile('./data.json', JSON.stringify(dataObject, null, 2), err => {
     if (err) {
       console.error(err);
       res.status(500);
@@ -75,6 +75,36 @@ app.post('/api/notes', (req, res) => {
         res.send();
       }
     }
+  });
+});
+
+app.delete('/api/notes/:id', (req, res, next) => {
+  const idNum = req.params.id;
+  const errId = { error: '' };
+  fs.writeFile('./data.json', JSON.stringify(dataObject, null, 2), err => {
+    if (err) {
+      console.error(err);
+      res.status(500);
+      errId.error = 'An unexpected error occurred.';
+      res.send(errId);
+      process.exit(1);
+    }
+    for (const key in dataObject.notes) {
+      const id = key;
+      if (!Number(idNum) || Number(idNum) < 0) {
+        res.status(400);
+        errId.error = 'id must be a positive integer';
+      } else if (id === idNum) {
+        res.status(204);
+        delete dataObject.notes[idNum];
+        res.send(dataObject.notes[idNum]);
+        return next();
+      } else if (id !== idNum) {
+        res.status(404);
+        errId.error = `cannot find note with id ${idNum}`;
+      }
+    }
+    res.send(errId);
   });
 });
 
