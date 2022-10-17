@@ -50,16 +50,16 @@ const jsonMiddleware = express.json();
 app.use(jsonMiddleware);
 
 app.post('/api/notes', (req, res) => {
+  const newContent = req.body;
   const errId = { error: '' };
   fs.writeFile('./data.json', JSON.stringify(dataObject, null, 2), err => {
     if (err) {
-      console.error(err);
       res.status(500);
       errId.error = 'An unexpected error occurred.';
       res.send(errId);
+      console.error(err);
       process.exit(1);
     }
-    const newContent = req.body;
     for (const key in newContent) {
       if (key !== 'content') {
         res.status(400);
@@ -102,6 +102,44 @@ app.delete('/api/notes/:id', (req, res, next) => {
       } else if (id !== idNum) {
         res.status(404);
         errId.error = `cannot find note with id ${idNum}`;
+      }
+    }
+    res.send(errId);
+  });
+});
+
+app.put('/api/notes/:id', (req, res, next) => {
+  const idNum = req.params.id;
+  const newContent = req.body;
+  const errId = { error: '' };
+  fs.writeFile('./data.json', JSON.stringify(dataObject, null, 2), err => {
+    if (err) {
+      res.status(500);
+      errId.error = 'An unexpected error occurred.';
+      res.send(errId);
+      console.error(err);
+      process.exit(1);
+    }
+    for (const key in dataObject.notes) {
+      for (const property in newContent) {
+        const id = key;
+        if (!Number(idNum) || Number(idNum) < 0) {
+          res.status(400);
+          errId.error = 'id must be a positive integer';
+        } else if (property !== 'content') {
+          res.status(400);
+          errId.error = 'content is a required field';
+        } else if (id === idNum && property === 'content') {
+          res.status(200);
+          dataObject.notes[id] = newContent;
+          dataObject.notes[id].id = Number(id);
+          res.json(dataObject.notes[id]);
+          res.send();
+          return next();
+        } else if (id !== idNum) {
+          res.status(404);
+          errId.error = `cannot find note with id ${idNum}`;
+        }
       }
     }
     res.send(errId);
