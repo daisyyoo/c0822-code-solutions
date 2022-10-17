@@ -1,4 +1,5 @@
 select "actorId",
       "firstName"
   from "actors"
-  limit 10;
+  where "lastName" = 'Kilmer';
+  limit 2;
