@@ -81,15 +81,14 @@ app.post('/api/notes', (req, res) => {
 
 app.delete('/api/notes/:id', (req, res, next) => {
   const idNum = req.params.id;
-  // const errId = { error: '' };
+  const errId = { error: '' };
   for (const key in dataObject.notes) {
-    // const id = key;
     if (!Number(idNum) || Number(idNum) < 0) {
-      res.status(400).json({ error: ' id must be a positive integer' });
-      // errId.error = 'id must be a positive integer';
+      res.status(400);
+      errId.error = 'id must be a positive integer';
     } else if (key !== idNum) {
-      res.status(404).json({ error: `cannot find note with id ${idNum}` });
-      // errId.error = `cannot find note with id ${idNum}`;
+      res.status(404);
+      errId.error = `cannot find note with id ${idNum}`;
     } else if (key === idNum) {
       res.status(204);
       delete dataObject.notes[idNum];
@@ -101,11 +100,9 @@ app.delete('/api/notes/:id', (req, res, next) => {
     if (err) {
       console.error(err);
       res.status(500).json({ error: 'An unexpected error occured' });
-      // errId.error = 'An unexpected error occurred.';
-      // res.send(errId);
       process.exit(1);
     }
-    res.send();
+    res.send(errId);
   });
 });
 
@@ -115,21 +112,20 @@ app.put('/api/notes/:id', (req, res, next) => {
   const errId = { error: '' };
   for (const key in dataObject.notes) {
     for (const property in newContent) {
-      const id = key;
       if (!Number(idNum) || Number(idNum) < 0) {
         res.status(400);
         errId.error = 'id must be a positive integer';
       } else if (property !== 'content') {
         res.status(400);
         errId.error = 'content is a required field';
-      } else if (id !== idNum) {
+      } else if (key !== idNum) {
         res.status(404);
         errId.error = `cannot find note with id ${idNum}`;
-      } else if (id === idNum && property === 'content') {
+      } else if (key === idNum && property === 'content') {
         res.status(200);
-        dataObject.notes[id] = newContent;
-        dataObject.notes[id].id = Number(id);
-        res.json(dataObject.notes[id]);
+        dataObject.notes[key] = newContent;
+        dataObject.notes[key].id = Number(key);
+        res.json(dataObject.notes[key]);
         res.send();
         return next();
       }
@@ -137,9 +133,7 @@ app.put('/api/notes/:id', (req, res, next) => {
   }
   fs.writeFile('./data.json', JSON.stringify(dataObject, null, 2), err => {
     if (err) {
-      res.status(500);
-      errId.error = 'An unexpected error occurred.';
-      res.send(errId);
+      res.status(500).json({ error: 'An unexpected error occured' });
       console.error(err);
       process.exit(1);
     }
