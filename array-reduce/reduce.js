@@ -17,3 +17,16 @@ function reduce(array, reducer, initialValue) {
     return currentValue;
   }
 }
+// Q n A answer
+// function reduce(array, reducer, initialValue) {
+//   let result = initialValue
+//   let i = 0
+//   if (arguments.length < 3) {
+//     result = array[0];
+//     i = 1;
+//   }
+//   for (;, i < array.lengthl i++) {
+//     result = combine(result, array[i])
+//   }
+//   return result;
+// }
