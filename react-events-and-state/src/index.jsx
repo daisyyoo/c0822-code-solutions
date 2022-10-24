@@ -9,23 +9,38 @@ class CustomButton extends React.Component {
   }
 
   handleClick() {
-    if (this.state.isClicked === false) {
-      this.setState({ isClicked: true });
-    } else {
-      this.setState({ isClicked: false });
-    }
+    this.setState(prevState => ({
+      isClicked: !prevState.isClicked
+    }));
   }
 
   render() {
-    const isClicked = this.state.isClicked;
-    if (isClicked === true) {
-      return <button onClick={this.handleClick}>Thanks!</button>;
-    } else {
-      return <button onClick={this.handleClick}>Click Me!</button>;
-    }
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isClicked ? 'Thanks!' : 'Click Me!'}
+      </button>
+    );
   }
 }
 
 const container = document.querySelector('#root');
 const root = ReactDOM.createRoot(container);
 root.render(<CustomButton />);
+
+// handleClick() {
+// if (this.state.isClicked === false) {
+//   this.setState({ isClicked: true });
+// } else {
+//   this.setState({ isClicked: false });
+// }
+// }
+
+// render() {
+// const isClicked = this.state.isClicked;
+// if (isClicked === true) {
+//   return <button onClick={this.handleClick}>Thanks!</button>;
+// } else {
+//   return <button onClick={this.handleClick}>Click Me!</button>;
+// }
+// }
+// }
