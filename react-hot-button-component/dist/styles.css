@@ -1,0 +1,38 @@
+button {
+  cursor: pointer;
+}
+
+.zero {
+  background-color: black;
+  color: white;
+}
+
+.three {
+  background-color: purple;
+  color: white;
+}
+
+.six {
+  background-color: rebeccapurple;
+  color: white;
+}
+
+.nine {
+  background-color: salmon;
+  color: white;
+}
+
+.twelve {
+  background-color: orange;
+  color: black;
+}
+
+.fifteen {
+  background-color: yellow;
+  color: black;
+}
+
+.eighteen {
+  background-color: white;
+  color: black;
+}
