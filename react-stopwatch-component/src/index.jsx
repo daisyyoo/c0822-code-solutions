@@ -40,7 +40,7 @@ class Stopwatch extends React.Component {
     return (
       <div className="container">
         <div className="watch-background">
-          <div className="watch-face">{countNumber}</div>
+          <div onClick={this.handleClick} className="watch-face">{countNumber}</div>
         </div>
         <i onClick={this.handleClick} className={`fa-solid ${iconStatus}`}></i>
       </div>
