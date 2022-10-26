@@ -44,20 +44,9 @@ class PasswordInput extends React.Component {
     }
   }
 
-  // requirePassword() {
-  //   const passwordInput = this.state.password;
-  //   const number = /\d/;
-  //   const capLetter = /\[A-Z]/;
-  //   const symbol = /[!@#$%^&*()]/;
-  //   if (!passwordInput.test(number)) { return 'Your password must contain at least 1 integer.'; }
-  //   if (!passwordInput.test(capLetter)) { return 'Your password must contain at least 1 capital letter.'; }
-  //   if (!passwordInput.test(symbol)) { return 'Your password must contain at least 1 symbol.'; }
-  // }
-
   render() {
     const iconName = this.getIconName();
     const message = this.getMessage();
-    // const requirement = this.requirePassword();
     return (
       <form>
         <label className="label-text">
