@@ -52,7 +52,7 @@ class PasswordInput extends React.Component {
         <label className="label-text">
           Password
         <div className="mid-row">
-          <input type="text" value={this.state.password} onChange={this.handlePasswordChange}/>
+          <input type="password" value={this.state.password} onChange={this.handlePasswordChange}/>
           <i className={`fa-solid ${iconName}`}></i>
         </div>
         </label>
