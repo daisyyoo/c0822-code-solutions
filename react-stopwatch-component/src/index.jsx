@@ -9,16 +9,7 @@ class Stopwatch extends React.Component {
       currentCount: 0
     };
     this.handleClick = this.handleClick.bind(this);
-  }
-
-  stopWatchRunning() {
-    this.timerID = setInterval(
-      () => this.count(), 1000
-    );
-  }
-
-  stopWatchPaused() {
-    clearInterval(this.timerID);
+    this.resetCount = this.resetCount.bind(this);
   }
 
   count() {
@@ -28,10 +19,21 @@ class Stopwatch extends React.Component {
   }
 
   handleClick() {
-    this.setState({
-      isStarted: !this.state.isStarted,
-      currentCount: this.stopWatchRunning()
-    });
+    if (this.state.isStarted === true) {
+      this.setState({ isStarted: false });
+      clearInterval(this.timerID);
+    } else if (this.state.isStarted === false) {
+      this.setState({ isStarted: true });
+      this.timerID = setInterval(
+        () => this.count(), 1000
+      );
+    }
+  }
+
+  resetCount() {
+    if (this.state.isStarted === false) {
+      this.setState({ currentCount: 0 });
+    }
   }
 
   render() {
@@ -40,7 +42,7 @@ class Stopwatch extends React.Component {
     return (
       <div className="container">
         <div className="watch-background">
-          <div onClick={this.handleClick} className="watch-face">{countNumber}</div>
+          <div onClick={this.resetCount}className="watch-face">{countNumber}</div>
         </div>
         <i onClick={this.handleClick} className={`fa-solid ${iconStatus}`}></i>
       </div>
