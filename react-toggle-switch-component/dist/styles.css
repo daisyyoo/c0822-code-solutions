@@ -1,0 +1,23 @@
+.background {
+  width: 100px;
+  background-color: green;
+  border: solid 1px black;
+  border-radius: 50px;
+}
+
+.toggle-button {
+  height: 50px;
+  width: 50px;
+  border: solid 1px black;
+  background-color: white;
+  border-radius: 100%;
+  position: relative;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  left: 48px;
+}
