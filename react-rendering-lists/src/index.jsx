@@ -24,3 +24,15 @@ function PokedexNames(props) {
 const container = document.querySelector('#root');
 const root = ReactDOM.createRoot(container);
 root.render(<PokedexNames pokedex={pokedex}/>);
+
+// const element = (
+//   <ul>
+//     {
+//       pokedex.map(pokemon => {
+//         return <li key={pokemon.number}>{pokemon.name}</li>;
+//       })
+//     }
+//   </ul>
+// );
+
+// root.render(element);
