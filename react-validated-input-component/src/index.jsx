@@ -30,9 +30,9 @@ class PasswordInput extends React.Component {
     if (passwordInput.length < 8) { return 'Your password is too short.'; }
     if (passwordInput.length >= 8) {
       const number = /\d/;
-      const capLetter = /\[A-Z]/;
+      const capLetter = /[A-Z]/;
       const symbol = /[!@#$%^&*()]/;
-      if (passwordInput.search(number) === -1) {
+      if (!passwordInput.match(number)) {
         return 'Your password must contain at least 1 integer.';
       } else if (passwordInput.search(capLetter) === -1) {
         return 'Your password must contain at least 1 capital letter.';
@@ -52,7 +52,7 @@ class PasswordInput extends React.Component {
         <label className="label-text">
           Password
         <div className="mid-row">
-          <input type="password" value={this.state.password} onChange={this.handlePasswordChange}/>
+          <input type="text" value={this.state.password} onChange={this.handlePasswordChange}/>
           <i className={`fa-solid ${iconName}`}></i>
         </div>
         </label>
