@@ -1,0 +1,19 @@
+* {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.title-box,
+.content-box {
+  border: solid 1px black;
+  width: 300px;
+  padding: 0.5rem;
+}
+
+.title-box {
+  background-color: lightgrey;
+  font-size: 1.2rem;
+}
+
+.hide {
+  display: none;
+}
