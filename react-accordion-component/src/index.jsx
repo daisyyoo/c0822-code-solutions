@@ -24,24 +24,37 @@ class Accordion extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      clickedId: null
+      clickedId: null,
+      isOpen: false
     };
     this.toggleOpen = this.toggleOpen.bind(this);
+  }
+
+  isOpen() {
+    this.setState({ isOpen: !this.state.isOpen });
   }
 
   toggleOpen(event) {
     this.setState({ clickedId: event.target.id });
   }
 
+  className(event) {
+    if (this.state.clickedId === '1') {
+      return 'hide';
+    } else {
+      return 'show';
+    }
+  }
+
   render() {
     const { toggleOpen } = this;
     const { contentArray } = this.props;
-    const show = this.state.clickedId === contentArray.id ? 'hide' : 'show';
+    const className = this.className();
     return (
       contentArray.map(topic => (
         <div key={topic.id}>
           <div id={topic.id} onClick={toggleOpen} className="title-box" >{topic.name}</div>
-          <div className={`content-box ${show}`}>{topic.description}</div>
+          <div className={`content-box ${className}`}>{topic.description}</div>
         </div>
       ))
     );
