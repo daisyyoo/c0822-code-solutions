@@ -47,21 +47,15 @@ export default class App extends React.Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        task: this.body, // need to figure out how to identify the text in text bar
-        isCompleted: false
-      })
+      body: JSON.stringify(newTodo)
     })
       .then(res => res.json())
       .then(newTodo => {
-        // console.log('1', 'hi');
         const origTodos = this.state.todos;
-        const copyTodos = Array.prototype.concat(origTodos);
-        copyTodos.push(newTodo);
-        this.setState({ copyTodos });
+        const copyTodos = origTodos.concat(newTodo);
+        this.setState({ todos: copyTodos });
       })
       .catch(err => console.error(err));
-
   }
 
   toggleCompleted(todoId) {
@@ -73,7 +67,7 @@ export default class App extends React.Component {
      * Then 😉, once the response JSON is received and parsed,
      *   - create a shallow copy of the todos array from state
      *   - replace the old todo with the todo received from the server
-     *   - replace the old todos in the state with the new one (you know the index).
+     *   - replac the old todos in the state with the new one (you know the index).
      *
      * NOTE: "toggle" means to flip back and forth, so clicking a todo
      * in the list repeatedly should "toggle" its isCompleted status back and forth.
@@ -86,6 +80,24 @@ export default class App extends React.Component {
      * TIP: Be sure to SERIALIZE the updates in the body with JSON.stringify()
      * And specify the "Content-Type" header as "application/json"
      */
+    const findTodoIndex = this.state.todos.findIndex(todo => todo.todoId === todoId);
+    const status = this.state.todos[findTodoIndex].isCompleted;
+    const newStatus = { isCompleted: !status };
+    fetch(`/api/todos/${todoId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state.todos[findTodoIndex])
+    })
+      .then(res => res.json())
+      .then(foundTodo => {
+        const origTodos = this.state.todos;
+        foundTodo.isCompleted = newStatus.isCompleted;
+        origTodos[findTodoIndex] = foundTodo;
+        this.setState({ todos: origTodos });
+      })
+      .catch(err => console.error(err));
   }
 
   render() {
