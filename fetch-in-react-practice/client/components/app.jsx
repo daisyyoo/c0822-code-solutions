@@ -92,8 +92,7 @@ export default class App extends React.Component {
     })
       .then(res => res.json())
       .then(foundTodo => {
-        const origTodos = this.state.todos;
-        const newTodos = origTodos;
+        const newTodos = this.state.todos.slice();
         foundTodo.isCompleted = newStatus.isCompleted;
         newTodos[findTodoIndex] = foundTodo;
         this.setState({ todos: newTodos });
