@@ -4,7 +4,21 @@ import ReactDOM from 'react-dom/client';
 class Carousel extends React.Component {
   render() {
     return (
-      <img></img>
+      <div className="container">
+        <div className="row">
+          <div className="left-arrow">
+
+          </div>
+          <div className="image-container">
+            <div className="">
+
+            </div>
+          </div>
+          <div className="right-arrow">
+
+          </div>
+        </div>
+      </div>
     );
   }
 }
