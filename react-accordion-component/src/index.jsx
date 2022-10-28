@@ -24,22 +24,21 @@ class Accordion extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      clickedId: null,
-      isOpen: false
+      clickedId: null
     };
     this.toggleOpen = this.toggleOpen.bind(this);
   }
 
-  isOpen() {
-    this.setState({ isOpen: !this.state.isOpen });
-  }
-
   toggleOpen(event) {
-    this.setState({ clickedId: event.target.id });
+    if (event.target.id !== this.state.clickedId) {
+      this.setState({ clickedId: event.target.id });
+    } else {
+      this.setState({ clickedId: null });
+    }
   }
 
-  className(event) {
-    if (this.state.clickedId === '1') {
+  className() {
+    if (this.state.clickedId === this.props.id) {
       return 'hide';
     } else {
       return 'show';
@@ -49,7 +48,7 @@ class Accordion extends React.Component {
   render() {
     const { toggleOpen } = this;
     const { contentArray } = this.props;
-    const className = this.className();
+    const { className } = this;
     return (
       contentArray.map(topic => (
         <div key={topic.id}>
