@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import Accordion from './accordion';
+import Accordion from './accordion';
 
 const contentArray = [
   {
@@ -19,45 +19,6 @@ const contentArray = [
     description: 'JavaScript, often abbreviated as JS, is a high-level, interpreted programming language that conforms to the ECMAScript specification. JavaScript has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions.'
   }
 ];
-
-class Accordion extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      clickedId: null
-    };
-    this.toggleOpen = this.toggleOpen.bind(this);
-  }
-
-  toggleOpen(event) {
-    if (event.target.id !== this.state.clickedId) {
-      this.setState({ clickedId: event.target.id });
-    } else {
-      this.setState({ clickedId: null });
-    }
-  }
-
-  className(id) {
-    if (this.state.clickedId === id.toString()) {
-      return 'content-box';
-    } else {
-      return 'content-box hide';
-    }
-  }
-
-  render() {
-    const { toggleOpen } = this;
-    const { contentArray } = this.props;
-    return (
-      contentArray.map(topic => (
-        <div key={topic.id}>
-          <div id={topic.id} onClick={toggleOpen} className="title-box" >{topic.name}</div>
-          <div className={`${this.className(topic.id)}`}>{topic.description}</div>
-        </div>
-      ))
-    );
-  }
-}
 
 const container = document.querySelector('#root');
 const root = ReactDOM.createRoot(container);

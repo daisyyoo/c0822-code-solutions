@@ -1,42 +1,40 @@
 import React from 'react';
+
 export default class Accordion extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      HTML: true,
-      CSS: false,
-      JS: false
+      clickedId: null
     };
-    this.handleHTMLClick = this.handleHTMLClick.bind(this);
-    this.handleCSSClick = this.handleCSSClick.bind(this);
-    this.handleJSClick = this.handleJSClick.bind(this);
+    this.toggleOpen = this.toggleOpen.bind(this);
   }
 
-  handleHTMLClick() {
-    this.setState({ HTML: !this.state.HTML });
+  toggleOpen(event) {
+    if (event.target.id !== this.state.clickedId) {
+      this.setState({ clickedId: event.target.id });
+    } else {
+      this.setState({ clickedId: null });
+    }
   }
 
-  handleCSSClick() {
-    this.setState({ CSS: !this.state.CSS });
-  }
-
-  handleJSClick() {
-    this.setState({ JS: !this.state.JS });
+  className(id) {
+    if (this.state.clickedId === id.toString()) {
+      return 'content-box';
+    } else {
+      return 'content-box hide';
+    }
   }
 
   render() {
-    const showHTML = this.state.HTML ? 'hide' : 'show';
-    const showCSS = this.state.CSS ? 'hide' : 'show';
-    const showJS = this.state.JS ? 'hide' : 'show';
+    const { toggleOpen } = this;
+    const { contentArray } = this.props;
     return (
-      <div className="container">
-        <div onClick={this.handleHTMLClick} className="title-box">Hypertext Markup Language</div>
-        <div className={`content-box ${showHTML}`}>content</div>
-        <div onClick={this.handleCSSClick} className="title-box">Cascading Style Sheets</div>
-        <div className={`content-box ${showCSS}`}>more content</div>
-        <div onClick={this.handleJSClick} className="title-box">JavaScript</div>
-        <div className={`content-box ${showJS}`}>more more content</div>
-      </div>
+      contentArray.map(topic => (
+        <div key={topic.id}>
+          <div id={topic.id} onClick={toggleOpen} className="title-box" >{topic.name}</div>
+          <div className={`${this.className(topic.id)}`}>{topic.description}</div>
+        </div>
+      ))
     );
   }
 }
