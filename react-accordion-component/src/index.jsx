@@ -37,23 +37,22 @@ class Accordion extends React.Component {
     }
   }
 
-  className() {
-    if (this.state.clickedId === this.props.id) {
-      return 'hide';
+  className(id) {
+    if (this.state.clickedId === id.toString()) {
+      return 'content-box';
     } else {
-      return 'show';
+      return 'content-box hide';
     }
   }
 
   render() {
     const { toggleOpen } = this;
     const { contentArray } = this.props;
-    const { className } = this;
     return (
       contentArray.map(topic => (
         <div key={topic.id}>
           <div id={topic.id} onClick={toggleOpen} className="title-box" >{topic.name}</div>
-          <div className={`content-box ${className}`}>{topic.description}</div>
+          <div className={`${this.className(topic.id)}`}>{topic.description}</div>
         </div>
       ))
     );
