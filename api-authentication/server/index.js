@@ -46,46 +46,37 @@ app.post('/api/auth/sign-in/', (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
     throw new ClientError(401, 'invalid login');
+    // it'll find the first error middleware and use the error status and the message in the json response
   }
-  argon2
-    .hash(password)
-    .then(hashedPassword => {
-      const sql = `
+  const sql = `
       select
       "userId",
       "hashedPassword"
       from "users"
       where "username" = $1
       `;
-      const params = [username];
-      db.query(sql, params)
-        .then(result => {
-          const user = result.rows;
-          if (user.length === 0) {
+  const params = [username];
+  db.query(sql, params)
+    .then(result => {
+      const [user] = result.rows;
+      if (!user) {
+        throw new ClientError(401, 'invalid login');
+      }
+      const { userId, hashedPassword } = user;
+      return argon2
+        .verify(hashedPassword, password)
+        .then(isMatching => {
+          if (isMatching === false) {
             throw new ClientError(401, 'invalid login');
-          } else {
-            argon2
-              .verify(user[0].hashedPassword, hashedPassword)
-              .then(isMatching => {
-                if (isMatching === false) {
-                  throw new ClientError(401, 'invalid login');
-                } else {
-                  const payload = {
-                    userId: user[0].userId,
-                    username
-                  };
-                  const token = jwt.sign(payload, process.env.TOKEN_SECRET);
-                  const userInfo = {
-                    token,
-                    user: payload
-                  };
-                  res.status(201).json(userInfo);
-                }
-              })
-              .catch(err => next(err));
           }
-        })
-        .catch(err => next(err));
+          const payload = { userId, username };
+          const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+          const userInfo = {
+            token,
+            user: payload
+          };
+          res.json(userInfo);
+        });
     })
     .catch(err => next(err));
 });
