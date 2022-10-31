@@ -30,7 +30,6 @@ app.post('/api/auth/sign-up', (req, res, next) => {
       const sql = `
         insert into "users" ("username", "hashedPassword")
         values ($1, $2)
-        returning *
         `;
       const params = [username, hashedPassword];
       db.query(sql, params)
@@ -40,7 +39,6 @@ app.post('/api/auth/sign-up', (req, res, next) => {
         })
         .catch(err => {
           next(err);
-          throw new ClientError(500, 'an unexpected error occurred');
         });
     })
     .catch(err => {
