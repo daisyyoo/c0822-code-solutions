@@ -39,10 +39,8 @@ app.post('/api/auth/sign-up', (req, res, next) => {
           res.status(201).json(userInfo);
         })
         .catch(err => {
-          console.error(err);
-          res.status(500).json({
-            error: 'an unexpected error occurred'
-          });
+          next(err);
+          throw new ClientError(500, 'an unexpected error occurred');
         });
     })
     .catch(err => {
