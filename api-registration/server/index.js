@@ -30,22 +30,21 @@ app.post('/api/auth/sign-up', (req, res, next) => {
       const sql = `
         insert into "users" ("username", "hashedPassword")
         values ($1, $2)
+        returning "userId", "username", "createdAt"
         `;
       const params = [username, hashedPassword];
-      db.query(sql, params)
-        .then(result => {
-          const [userInfo] = result.rows;
-          res.status(201).json(userInfo);
-        })
-        .catch(err => {
-          next(err);
-        });
+      return db.query(sql, params);
+      // return value of a given then callback is sent to the next then callback, forcing outer chain to adopt to the inner promise chain
+      // the first promise above stays pending until the promise below is fulfilled.
     })
-    .catch(err => {
-      next(err);
-    });
+    .then(result => {
+      const [userInfo] = result.rows;
+      res.status(201).json(userInfo);
+    })
+    .catch(err => next(err));
+});
 
-  /**
+/**
    * Hash the user's password with `argon2.hash()`
    * Then, 😉
    *   Insert the user's "username" and "hashedPassword" into the "users" table.
@@ -56,8 +55,6 @@ app.post('/api/auth/sign-up', (req, res, next) => {
    *
    * Hint: Insert statements can include a `returning` clause to retrieve the insterted row(s).
    */
-
-});
 
 app.use(errorMiddleware);
 
