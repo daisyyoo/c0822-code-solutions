@@ -7,16 +7,12 @@ function authorizationMiddleware(req, res, next) {
   if (!token) {
     throw new ClientError(401, 'authentication required');
   }
-  try {
-    const payload = jwt.verify(token, process.env.TOKEN_SECRET);
-    req.user = payload;
-    next();
-  } catch (err) {
-    console.error(err);
-    next();
-  }
+  const payload = jwt.verify(token, process.env.TOKEN_SECRET);
+  req.user = payload;
+  next();
+}
 
-  /**
+/**
    * Try to get the 'X-Access-Token' from the request headers.
    * If no token is provided,
    *   throw a 401 error with the message 'authentication required'
@@ -25,12 +21,11 @@ function authorizationMiddleware(req, res, next) {
    * Call next() (with no arguments) to let Express know to advance to its next route or middleware.
    */
 
-  /**
+/**
     * References:
     * https://expressjs.com/en/4x/api.html#req.get
     * https://nodejs.org/api/http.html#http_message_headers
     * https://github.com/auth0/node-jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback
     */
-}
 
 module.exports = authorizationMiddleware;
