@@ -12,29 +12,34 @@ export default class Carousel extends React.Component {
   }
 
   setOpenPic(array) {
-    if (this.state.currentIndex < array.length) {
+    const thisArray = this.props.array;
+    if (this.state.currentIndex < thisArray.length) {
       this.setState({ currentIndex: this.state.currentIndex + 1 });
-    } else if (this.state.currentIndex > array.length) {
+    } else if (this.state.currentIndex > thisArray.length) {
       this.setState({ currentIndex: 0 });
     }
   }
 
   getPicIndex(event) {
-    const newIndex = event.target.index;
+    const newIndex = event.target.id;
     // have to check if this can get the index of the button
     this.setOpenPic(newIndex);
   }
 
   goLeft(event) {
     clearInterval(this.timerID);
+    this.setState({ currentIndex: this.state.currentIndex + 1 });
     this.getPicIndex(event);
+    // this.setOpenPic();
   }
 
   goRight(event) {
-
+    clearInterval(this.timerId);
+    this.getPicIndex(event);
   }
 
   render() {
+    const thisArray = this.props.array;
     const { setOpenPic } = this;
     const { getPicIndex } = this;
     const { goLeft } = this;
@@ -47,10 +52,10 @@ export default class Carousel extends React.Component {
           </div>
           <div className="image-container col-3">
             <div className="images">
-              <RenderImages array={picArray} setOpenPic={setOpenPic} />
+              <RenderImages array={thisArray} setOpenPic={setOpenPic} />
             </div>
             <div className="bottom-nav">
-              <MakeButtons array={picArray} getPicIndex={getPicIndex} />
+              <MakeButtons array={thisArray} getPicIndex={getPicIndex} />
             </div>
           </div>
           <div className="right-arrow col-3">
@@ -92,31 +97,3 @@ function MakeButtons({ array, getPicIndex }) {
     </React.Fragment>
   );
 }
-
-const picArray = [
-  {
-    id: 1,
-    name: 'Bulbasaur',
-    url: '../images/001.png'
-  },
-  {
-    id: 1,
-    name: 'Charmander',
-    url: '../images/004.png'
-  },
-  {
-    id: 1,
-    name: 'Squirtle',
-    url: '../images/007.png'
-  },
-  {
-    id: 1,
-    name: 'Pikachu',
-    url: '../images/025.png'
-  },
-  {
-    id: 1,
-    name: 'Jigglypuff',
-    url: '../images/039.png'
-  }
-];
