@@ -18,6 +18,10 @@
   font-size: 2rem;
 }
 
+i {
+  cursor: pointer;
+}
+
 img {
   max-width: 100%;
 }

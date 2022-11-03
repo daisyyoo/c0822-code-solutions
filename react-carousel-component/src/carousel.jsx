@@ -4,46 +4,61 @@ export default class Carousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = { currentIndex: 0 };
-    this.handleClick = this.handleClick.bind(this);
+    this.carousel = this.carousel.bind(this);
+    this.getPicIndex = this.getPicIndex.bind(this);
+    this.goLeft = this.goLeft.bind(this);
+    this.goRight = this.goRight.bind(this);
   }
 
   componentDidMount() {
-    this.timerID = setInterval(() => this.setOpenPic(), 1000);
+    this.timerID = setInterval(
+      () => this.carousel(this.state.currentIndex), 1000);
   }
 
-  setOpenPic(array) {
-    const thisArray = this.props.array;
-    if (this.state.currentIndex < thisArray.length) {
+  carousel() {
+    const { picArray } = this.props;
+    if (this.state.currentIndex < picArray.length - 1) {
       this.setState({ currentIndex: this.state.currentIndex + 1 });
-    } else if (this.state.currentIndex > thisArray.length) {
+    } else if (this.state.currentIndex === picArray.length - 1) {
       this.setState({ currentIndex: 0 });
     }
   }
 
   getPicIndex(event) {
-    const newIndex = event.target.id;
-    // have to check if this can get the index of the button
-    this.setOpenPic(newIndex);
+    clearInterval(this.timerID);
+    const newIndex = Number(event.target.id);
+    this.setState({ currentIndex: newIndex });
+    this.timerID = setInterval(() => this.carousel(this.state.currentIndex), 1000);
   }
 
   goLeft(event) {
+    const { picArray } = this.props;
     clearInterval(this.timerID);
-    this.setState({ currentIndex: this.state.currentIndex + 1 });
-    this.getPicIndex(event);
-    // this.setOpenPic();
+    if (this.state.currentIndex <= picArray.length - 1 && this.state.currentIndex > 0) {
+      this.setState({ currentIndex: this.state.currentIndex - 1 });
+    } else if (this.state.currentIndex === 0) {
+      this.setState({ currentIndex: picArray.length - 1 });
+    }
+    this.timerID = setInterval(() => this.carousel(this.state.currentIndex), 1000);
   }
 
   goRight(event) {
-    clearInterval(this.timerId);
-    this.getPicIndex(event);
+    const { picArray } = this.props;
+    clearInterval(this.timerID);
+    if (this.state.currentIndex < picArray.length - 1) {
+      this.setState({ currentIndex: this.state.currentIndex + 1 });
+    } else if (this.state.currentIndex === picArray.length - 1) {
+      this.setState({ currentIndex: 0 });
+    }
+    this.timerID = setInterval(() => this.carousel(this.state.currentIndex), 1000);
   }
 
   render() {
-    const thisArray = this.props.array;
-    const { setOpenPic } = this;
+    const { picArray } = this.props;
     const { getPicIndex } = this;
     const { goLeft } = this;
     const { goRight } = this;
+
     return (
       <div className="container">
         <div className="row">
@@ -52,10 +67,25 @@ export default class Carousel extends React.Component {
           </div>
           <div className="image-container col-3">
             <div className="images">
-              <RenderImages array={thisArray} setOpenPic={setOpenPic} />
-            </div>
+              {
+                picArray.map(pokemon => {
+                  return (
+                    <img key={pokemon.id}
+                      className={pokemon.id === this.state.currentIndex ? 'show' : 'hide'}
+                      src={pokemon.url}></img>
+                  );
+                })
+              }
+              </div>
             <div className="bottom-nav">
-              <MakeButtons array={thisArray} getPicIndex={getPicIndex} />
+              {
+                picArray.map(pokemon => {
+                  return (
+                    <i key={pokemon.id} id={pokemon.id} onClick={ getPicIndex}
+                      className={pokemon.id === this.state.currentIndex ? 'fa-solid fa-circle' : 'fa-regular fa-circle'} />
+                  );
+                })
+              }
             </div>
           </div>
           <div className="right-arrow col-3">
@@ -65,35 +95,4 @@ export default class Carousel extends React.Component {
       </div>
     );
   }
-}
-
-function RenderImages({ array, setOpenPic }) {
-  return (
-    <React.Fragment>
-      {
-        array.map(pokemon => {
-          return (
-            <img key={pokemon.id}
-              className={ setOpenPic ? 'show' : 'hide'}
-            src={pokemon.url}></img>
-          );
-        })
-      }
-    </ React.Fragment>
-  );
-}
-
-function MakeButtons({ array, getPicIndex }) {
-  return (
-    <React.Fragment>
-      {
-        array.map((pokemon, index) => {
-          return (
-            <i key={pokemon.id} id={index} onClick={getPicIndex}
-            className={ getPicIndex ? 'fa-solid fa-circle' : 'fa-regular fa-circle'} />
-          );
-        })
-      }
-    </React.Fragment>
-  );
 }
