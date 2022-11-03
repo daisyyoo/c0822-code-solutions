@@ -1,0 +1,264 @@
+--------
+User can sign up
+--------
+1. When user starts on the page, localhost:3000, index.jsx opens
+  - react, reactdom are grabbed from the respective packages
+  - App is grabbed from the ./app module
+  - React renders the page onto the root, created by ReactDOM in line 6, with
+    React element type App taking us to app.jsx
+2. In App.jsx, all the things are imported on the top of the module.
+  - The App class starts being constructed first, establishing state, and
+    binding the 2 methods
+      - this.state.route calls the parseRoute function with 1 argument window.location.hash
+        taking us to parse-route.js
+      - window.location.hash currently only returns '#', giving this.state.route
+        the value of { path: ' ' }, no params
+  - It jumps down to the render method, where the current state, established in
+    the constructor method, is true, so returns null and exits the render method
+  - Then componentDidMount() method gets called, at which the 'hashchange' event
+    listener gets attached to the window object forever.
+  - It also grabs the value of token from local storage to evaluate the value of user which
+    is currently null.
+  - Then the state of user and isAuthorizing is changed to the value of user
+    found above, null and isAuthorizing to false
+  - Since state is changed, render is called again
+  - In the render method, this.state.isAuthorizing is false, so it passes the barricade
+  - Various variables and methods are assigned values, which are used to assign
+    contextValue which will be the value of the AppContext object's Provider
+    React component, which takes us to app-context.js
+    - In app-context.js, a Context object is created, assigned to const variable
+      AppContext and then exported
+  - Back on the app.jsx, the value prop with the assigned value of contextValue
+    is now the value of the Provider React component with values that can be
+    accessed by the descendants of the React Elements
+  - Then there's a React Fragment allowing us to not have to add more div Elements
+  - Then the React element type Navbar is called, taking us to navbar.jsx
+    - In navbar.jsx, the navbar class function is called and then the render method
+      renders all the react elements.
+      - On line 6, user and handleSignOut are values grabbed from AppContext
+        which is assigned on line 37, but can be accessed at any time of the
+        lifecycle methods
+  - Once the navbar is rendered, we go back to app.jsx, on line 65, which calls
+    the React element type PageContainer with 1 child
+  - The child is the javascript expression renderPage method, which gets called,
+    jumping up to the line 45.
+    - The renderPage method decides the value of the const variable path from
+      this.state.route, which the current value is path: ' ', so it goes to the
+      React element type Home, taking us to home.jsx
+    - In home.jsx, const styles is defined with an object literal, with properties
+      that will be referenced later
+    - Class function Home is called, which calls the render method
+    - In the render method, the value of this.context.user is falsy, provided on
+       line 34, so it returns us to the React element type Redirect with prop to="sign-in"
+      - In redirect.jsx, the Redirect function is called with the prop to="sign-in"
+      - The const variable url is given the value of the window.location's url
+      - since the value of to is "sign-in", it skips to the else statement, where
+        the url is hashed with "sign-in", resulting in #sign-in
+      - This url value then replaces the url, changing the window.location to
+        /#sign-in
+      - This function then returns null
+  - Since the window.location had a 'hashchange' event, the event listener is
+    called, which changes the state of this.state.route to the changed url from
+    redirect.jsx, which calls the parseRoute function
+      - In the parseRoute function in parse-route.js, it ends up returning
+      { path: "sign-in" }, no params
+  - Back on app.jsx, because this.state.route is changed, render is called again
+  - In the render method, this.state.isAuthorizing is still false, so we pass it
+  - The various variables are assigned
+    - route has a different value than last time we rendered
+  - The values of the variables are assigned to the Provider React Component of
+    the AppContext React Element via the value prop with value of the variable
+    contextValue
+  - React Fragment
+  - The React element Navbar gets called, going to navbar.jsx
+    - The Navbar class function renders the React elements with the value of the
+      user and handleSignOut passed from AppContext and assigned to Navbar on line 37
+  - Back on app.jsx, the React element type PageContainer is about to be called,
+    but the child of javascript expression, this.renderPage() is called, so we
+    jump up to line 45 for the renderPage method
+  - The renderPage method sees the value of path is "sign-in", so it calls the
+    React element type Auth, taking us to auth.jsx
+    - In auth.jsx, the class function AuthPage is called, and then calls the
+      render method
+    - In the render method, const variable user, route and handleSignIn is assigned
+      values from AppContext on line 37
+    - On line 11, because user is null, we bypass it
+    - It then returns all the React elements
+    - On line 27, it calls the React element type AuthForm, taking us to auth-form.jsx
+      - In auth-form.jsx, the class function AuthForm gets called, where the constructor
+        function is called with props and sets the state and binds multiple prototype methods
+      - It then skips down to the render method and renders the form with the
+        value of prop action = "sign-in" to decide value of the variables on line 43, 46 and 49
+      - The rendered React Elements are sent to auth.jsx, to be added in the
+        auth.jsx's rendering of its React elements, which is sent to app.jsx
+  - Back on app.jsx, all the rendered React elements from React Element type Auth
+    is the value of the children for this.renderPage() for the React Element type
+    Page Container on line 66, taking us to page-container.jsx
+    - On page-container.jsx, the React elements are rendered in the PageContainer
+      function on line 13
+  - Now we are finished rendering App.jsx
+3. The user will then click either the Register Now linke or Sign Up button
+  - Clicking either of those will yield the same result since both have the same
+    value of href="#sign-up"
+  - This will trigger the 'hashchange' event on window object, which will return
+    { path: sign-up } from the parseRoute function and set that as new state, which
+    will cause a re-render
+  - In the render method, the React component Provider of the AppContext object
+    now has a changed route value of { path: sign-up }, with the rest staying
+    the same as previous
+  - Then React element type Navbar is called, and renders the same React elements
+    as before
+  - Then React element PageContainer is called, but we have to define the child
+    in the renderPage method on line 45 of app.jsx
+  - In the renderPage method, path === 'sign-up', so React element type Auth is called
+    - In auth.jsx, the class function AuthPage is called and in the render method,
+      the route value is different, so the welcomeMessage changes to 'Create an
+      account to get started!'
+    - While rendering, React element type AuthForm is called
+      - In auth-form.jsx, the AuthForm class function is called, where constructor
+        function is defined and render method is called
+      - This time, in the render method, the value of const variable action is
+        different, which is "sign-up", so the respective const variables values
+        are switched
+      - The rest of the React elements are rendered, sent to auth.jsx, which
+        renders its React elements and sent to app.jsx in line 51, which becomes
+        the value of this.renderPage() on line 66
+  - In app.jsx, we create React Element type PageContainer with the children
+    and render the page
+4. Now the user sees the sign-up page and is able to enter the respective
+  username and password in the input boxes
+  - As the user types in the input boxes of username and password, this triggers
+    the onChange event which triggers the handleChange method in auth-form.jsx,
+    which changes the value of this.state.username and this.state.password
+    respectively, which causes the form to re-render everytime the user types
+    something into the boxes
+  - Once the user finished typing in both boxes and clicks the Register button,
+    onSubmit event is called which triggers the handleSubmit function
+    - In the handleSubmit function, the page does not refresh thanks to event.preventDefault()
+    - Then it sends a fetch request to the server at the url with the value of action,
+      which is currently "sign-up" and the value of req, which will tell the server
+      what method and the type of header and the value of this.state stringified
+      - This will take us to the server/index.js (thanks to package.json line 8)
+        where all the express will look for the matching post method with the
+        matching url, which is on line 27
+      - Since the user has values in username and password, we bypass the if
+        statement and go to line 32, where the password is hashed
+      - Then the newly hashedPassword and username are put into the database on line 41
+        into their respective columns identified in the sql code on line 35
+      - The database then responds with the row that the username and hashedPassword
+        were put into and it is sent back to the client, to auth-form.jsx line 30
+    - The response from the database is then parsed
+    - The parsed result does nothing for now since the if statement on line 32
+      is triggered since action is currently "sign-up", which triggers the
+      'hashchange' event on the window
+      - This triggers the app.jsx to re-render with this.state.route becomes
+        { path: "sign-in" } and re-renders the sign-in page like mentioned above.
+    - So the database remembers the username and password and the user is taken
+      to the sign-in page
+--------
+User can sign in
+--------
+1. User will input the same username and password they used to sign-up earlier
+  which will change the state of this.state.username and this.state.password
+  respectively in auth-form.jsx due to the onChange event triggering the
+  handleChange function, causing the page to re-render each time the
+  value changes.
+2. Once the user presses Register or "enter", this will trigger the onSubmit event,
+which will trigger the handleSubmit function.
+  - This will also make a fetch request to the server, but with action === "sign-in"
+    - In server/index.js, express looks from the top down for the matching
+      method of "post" and url of '/api/auth/sign-in' which is found on line 50
+    - Then a request is made to the server on line 62 via the sql code on line
+      55 to get the userId and hashedPassword where the username matches to
+      the one typed by the user, sent over in the req.body
+    - In the then method, if the user isn't found, we get a client error with
+      a message saying invalid login since we didn't find anything with that username
+    - If the user is found, it returns the userId and hashedPassword, where we
+      verify if the value of the returned hashedPassword from the database
+      matches the hashedPassword of the provided password from user input in req.body
+    - If the hashedPasswords don't match, then we throw an error
+    - But if they do match, we assign a token that matches the value of userId
+      and username and send over the value of the token and userId and username
+      back to the client to auth-form.jsx on line 30
+  - Back in auth-form.jsx, we take the response from the server, parse it in
+    the first then method, and go into the second then method, where we skip to
+    the second if statement since action currently === 'sign-in'
+  - This calls the onSignIn method with the result as the argument, which is
+    provided from the prop passed in auth.jsx, which is accessed via AppContext
+    and has the same value as handleSignIn method in app.jsx
+  - In the handleSignIn method, it stores the value of the token in localStorage
+    and changes the value of this.state.user to the payload which contains
+    the userId and username
+  - Because the value of this.state.user changed, this causes a re-render
+  - In the render method, the AppContext.Provider value=contextValue's user value
+    changed, but others stayed the same
+  - Navbar changes since user now has a value
+    - It now returns the first javascript expression where user !== null
+  - PageContainer is called, but renderPage gets called first
+    - In the renderPage method, path is 'sign-in' so Auth gets called
+      - In auth.jsx, user has a value, so it returns Redirect with prop to=''
+        - In redirect.jsx, the first if statement is called, changing the url
+          to # and replaces the url, which triggers the 'hashchange' event on the
+          window, which changes this.state.route in the parseRoute function to
+          { path: ' ' }
+  - Because this.state.route is changed, this causes a re-render
+  - In the render method, the route value is changed.
+    - Navbar stays the same since route doesn't affect this
+    - The child of PageContainer calls the renderPage method, where path === ' '
+      so it takes us to Home
+      - In Home.jsx, in the class function Home, in the render method, we can
+        bypass the if statement since user has a value
+      - It returns the React elements, which become the children that is used to
+        render the PageContainer class function's React elements
+--------
+User can stay signed in
+--------
+1. When the user refreshes the page, the entire DOM element is yeeted and then
+  the index.jsx is re-rendered, meaning App is re-rendered
+  - In the class function App, the constructor function is defined with props,
+    and sets the states as is written
+  - Then we jump to the render method, where this.state.isAuthorizing is true
+    from the constructor function, so it returns null
+  - Then componentDidMount method is called where the 'hashchange' event listener
+    is once again attached to the window object
+  - But this time, the token has value since it was stored in localStorage
+  - It's also able to get user info by calling jwtDecode(token)
+  - Finally, it's able to change the value of this.state.user to the matching user
+    value from localStorage's token being decoded and changes this.state.isAuthorizing
+    to false
+  - Because state is changed, it causes a re-render
+  - In the render method, we bypass the guard since isAuthorizing is now false
+  - Now that the value of this.state is the same as before the page was refreshed,
+    it'll render the same page as when the user signed in (as mentioned above).
+
+--------
+User can sign out
+--------
+1. When user clicks Sign out in the nav-bar, this triggers the onClick event which
+  triggers the handleSignOut function, which is given the value from contextType
+  on line 37
+  - This takes us to app.jsx, line 40, which is the handleSignOut method
+    - In this method, the value of the token stored in localStorage is removed
+      and this.state.user value is changed to null
+  - Because this.state.user is changed, this causes a re-render
+  - In the render method, the value of this.state.user === null so,
+    - Navbar to change to the second javascript expression in the div element
+      where user === null
+    - PageContainer's child this.renderPage is called, which takes us to Home
+      - In Home, because user has no value, it takes us to Redirect with to="sign-in"
+        - In Redirect, the url is hashed with "sign-in" and replaced, causing
+          another 'hashchange' event, which changes this.state.route to
+          { path: 'sign-in } and then causes a re-render
+  - Back to the render method, Navbar is the same since user === null hasn't changed
+  - In PageContainer's child this.renderPage, now path === 'sign-in', so Auth is called
+    - In the AuthPage class function, we bypass line 11 since user is null
+    - The React elements are returned with route's value of 'sign-in' and then
+      AuthForm is called
+      - In the class function AuthForm, the constructor function is defined, and
+        the render method is called, with respect to action === 'sign-in'
+      - The React elements rendered are sent to auth.jsx, which renders its React
+        elements and sends them to app.jsx in the renderPage method line 51, which
+        is used as the value of the javascript expression in PageContainer's child
+        on line 66
+      - PageContainer is then finally called, which renders the children and
+        sends them back to app.jsx where the page is finished rendering
