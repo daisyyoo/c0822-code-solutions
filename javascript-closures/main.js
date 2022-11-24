@@ -3,6 +3,8 @@ function graduate(credential) {
     return fullName + ', ' + credential;
   };
 }
+// ES6
+// function graduate(credential) => (fullName) => `${fullName}, ${cred}`
 
 const medicalSchool = graduate('M.D.');
 const lawSchool = graduate('Esq.');
