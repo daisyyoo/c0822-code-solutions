@@ -2,10 +2,11 @@
   "root": true,
   "env": {
     "node": true,
+    "es6": true,
     "browser": true
   },
   "parserOptions": {
-    "ecmaVersion": 2015
+    "ecmaVersion": 8
   },
   "extends": [
     "plugin:react/recommended",

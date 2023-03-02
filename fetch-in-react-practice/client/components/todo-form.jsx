@@ -1,49 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-class TodoForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      task: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+export default function TodoForm(props) {
+  const [task, setTask] = useState('');
 
-  handleChange(event) {
-    this.setState({
-      task: event.target.value
-    });
-  }
-
-  handleSubmit(event) {
+  const handleSubmit = event => {
     event.preventDefault();
     const newTodo = {
-      task: this.state.task,
+      task,
       isCompleted: false
     };
-    this.props.onSubmit(newTodo);
-    this.setState({ task: '' });
-  }
+    props.onSubmit(newTodo);
+    setTask('');
+  };
 
-  render() {
-    const value = this.state.task;
-    return (
-      <form className="input-group mb-4 shadow-sm" onSubmit={this.handleSubmit}>
-        <input
-          required
-          autoFocus
-          type="text"
-          value={value}
-          className="form-control"
-          placeholder="What to do?"
-          onChange={this.handleChange}/>
-        <div className="input-group-append">
-          <button type="submit" className="btn btn-primary">Add Todo</button>
-        </div>
-      </form>
-    );
-  }
+  return (
+    <form className="input-group mb-4 shadow-sm" onSubmit={handleSubmit}>
+      <input
+        required
+        autoFocus
+        type="text"
+        name="task"
+        value={task}
+        onChange={event => setTask(event.target.value)}
+        className="form-control"
+        placeholder="What to do?"
+      />
+      <div className="input-group-append">
+        <button type="submit" className="btn btn-primary">Add Todo</button>
+      </div>
+    </form>
+  );
 }
-
-export default TodoForm;
