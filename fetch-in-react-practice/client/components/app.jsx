@@ -17,18 +17,6 @@ export default function App() {
       .catch(console.error);
   }, []);
 
-  // componentDidMount() {
-  //   /**
-  //    * Use fetch to send a GET request to `/api/todos`.
-  //    * Then 😉, once the response JSON is received and parsed,
-  //    * update state with the received todos.
-  //    */
-  //   fetch('/api/todos')
-  //     .then(res => res.json())
-  //     .then(todos => this.setState({ todos }))
-  //     .catch(err => console.error(err));
-  // }
-
   const handleSubmit = newTodo => {
     const addData = async () => {
       const response = await fetch('/api/todos',
@@ -47,28 +35,6 @@ export default function App() {
     addData()
       .catch(console.error);
   };
-  //
-  //   async function getResponse() {
-  //     const response = await fetch('/api/todos',
-  //       {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json'
-  //         },
-  //         body: JSON.stringify(newTodo)
-  //       });
-  //     if (!response.ok) {
-  //       const message = (`An error has occurred: ${response.status}`);
-  //       throw new Error(message);
-  //     }
-  //     const origTodos = response.json();
-  //     const copyTodos = origTodos.concat(newTodo);
-  //     setTodos(copyTodos);
-  //   }
-  //   getResponse().catch(error => {
-  //     console.log(error.message);
-  //   });
-  // }, [todos.length]);
 
   // handleSubmit(newTodo) {
   //   /**
@@ -87,21 +53,6 @@ export default function App() {
   //   * TIP: Use Array.prototype.concat to create a new array containing the contents
   //   * of the old array, plus the object returned by the server.
   //   */
-  //   fetch('/api/todos', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(newTodo)
-  //   })
-  //     .then(res => res.json())
-  //     .then(newTodo => {
-  //       const origTodos = this.state.todos;
-  //       const copyTodos = origTodos.concat(newTodo);
-  //       this.setState({ todos: copyTodos });
-  //     })
-  //     .catch(err => console.error(err));
-  // }
 
   const toggleCompleted = todoId => {
     const findTodoIndex = todos.findIndex(todo => todo.todoId === todoId);
@@ -147,25 +98,6 @@ export default function App() {
   //    * TIP: Be sure to SERIALIZE the updates in the body with JSON.stringify()
   //    * And specify the "Content-Type" header as "application/json"
   //    */
-  //   const findTodoIndex = this.state.todos.findIndex(todo => todo.todoId === todoId);
-  //   const status = this.state.todos[findTodoIndex].isCompleted;
-  //   const newStatus = { isCompleted: !status };
-  //   fetch(`/api/todos/${todoId}`, {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(this.state.todos[findTodoIndex])
-  //   })
-  //     .then(res => res.json())
-  //     .then(foundTodo => {
-  //       const newTodos = this.state.todos.slice();
-  //       foundTodo.isCompleted = newStatus.isCompleted;
-  //       newTodos[findTodoIndex] = foundTodo;
-  //       this.setState({ todos: newTodos });
-  //     })
-  //     .catch(err => console.error(err));
-  // }
 
   return (
     <div className="container">
