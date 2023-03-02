@@ -286,7 +286,6 @@
     "punycode": "^2.1.1",
     "queue-microtask": "^1.2.3",
     "quick-lru": "^4.0.1",
-    "react-hook-form": "^7.43.3",
     "react-is": "^16.13.1",
     "read-pkg": "^5.2.0",
     "read-pkg-up": "^7.0.1",
