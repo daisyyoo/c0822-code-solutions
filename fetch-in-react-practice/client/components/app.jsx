@@ -39,9 +39,10 @@ export default function App() {
           },
           body: JSON.stringify(newTodo)
         });
-      const origTodos = response.json();
-      const copyTodos = origTodos.concat(newTodo);
-      setTodos(copyTodos);
+      const newTask = await response.json();
+      const copyTodos = todos;
+      const totalTodos = copyTodos.concat(newTask);
+      setTodos(totalTodos);
     };
     addData()
       .catch(console.error);
