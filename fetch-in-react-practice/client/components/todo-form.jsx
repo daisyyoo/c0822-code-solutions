@@ -1,49 +1,50 @@
-import React from 'react';
+// import React, { useState } from 'react';
+// import { useForm } from 'react-hook-form';
 
-class TodoForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      task: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+// function TodoForm() {
+//   const [task, setTask] = useState({ task: '' });
+//   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  handleChange(event) {
-    this.setState({
-      task: event.target.value
-    });
-  }
+//   // constructor(props) {
+//   //   super(props);
+//   //   this.state = {
+//   //     task: ''
+//   //   };
+//   //   this.handleChange = this.handleChange.bind(this);
+//   //   this.handleSubmit = this.handleSubmit.bind(this);
+//   // }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const newTodo = {
-      task: this.state.task,
-      isCompleted: false
-    };
-    this.props.onSubmit(newTodo);
-    this.setState({ task: '' });
-  }
+//   // const handleChange = (event) {
+//   //   this.setState({
+//   //     task: event.target.value
+//   //   });
+//   // }
 
-  render() {
-    const value = this.state.task;
-    return (
-      <form className="input-group mb-4 shadow-sm" onSubmit={this.handleSubmit}>
-        <input
-          required
-          autoFocus
-          type="text"
-          value={value}
-          className="form-control"
-          placeholder="What to do?"
-          onChange={this.handleChange}/>
-        <div className="input-group-append">
-          <button type="submit" className="btn btn-primary">Add Todo</button>
-        </div>
-      </form>
-    );
-  }
-}
+//   // handleSubmit(event) {
+//   //   event.preventDefault();
+//   //   const newTodo = {
+//   //     task: this.state.task,
+//   //     isCompleted: false
+//   //   };
+//   //   this.props.onSubmit(newTodo);
+//   //   this.setState({ task: '' });
+//   // }
 
-export default TodoForm;
+//   return (
+//     <form className="input-group mb-4 shadow-sm" onSubmit={handleSubmit(onSubmit)}>
+//       <input
+//         required
+//         autoFocus
+//         type="text"
+//         value={task}
+//         className="form-control"
+//         placeholder="What to do?"
+//         {...register(task)}/>
+//       <div className="input-group-append">
+//         <button type="submit" className="btn btn-primary">Add Todo</button>
+//       </div>
+//     </form>
+//   );
+// }
+
+// export default TodoForm;

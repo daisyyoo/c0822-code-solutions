@@ -6,21 +6,16 @@ import TodoForm from './todo-form';
 export default function App() {
   const [todos, setTodos] = useState([]);
 
-  // this.addTodo = this.addTodo.bind(this);
-  // this.toggleCompleted = this.toggleCompleted.bind(this);
-
   useEffect(() => {
-    async function getResponse() {
+    const fetchData = async () => {
       const response = await fetch('/api/todos');
-      if (!response.ok) {
-        const message = (`An error has occurred: ${response.status}`);
-        throw new Error(message);
-      }
-      const todos = response.json();
+      const todos = await response.json();
       setTodos(todos);
-    }
-    getResponse().catch(err => err.message('Something went wrong!'));
-  });
+    };
+
+    fetchData()
+      .catch(console.error);
+  }, []);
 
   // componentDidMount() {
   //   /**
@@ -34,8 +29,8 @@ export default function App() {
   //     .catch(err => console.error(err));
   // }
 
-  useEffect(newTodo => {
-    async function getResponse() {
+  const handleSubmit = newTodo => {
+    const addData = async () => {
       const response = await fetch('/api/todos',
         {
           method: 'POST',
@@ -44,16 +39,35 @@ export default function App() {
           },
           body: JSON.stringify(newTodo)
         });
-      if (!response.ok) {
-        const message = (`An error has occurred: ${response.status}`);
-        throw new Error(message);
-      }
       const origTodos = response.json();
       const copyTodos = origTodos.concat(newTodo);
-      setTodos({ todos: copyTodos });
-    }
-    getResponse().catch(err => err.message('Something went wrong!'));
-  }, [todos]);
+      setTodos(copyTodos);
+    };
+    addData()
+      .catch(console.error);
+  };
+  //
+  //   async function getResponse() {
+  //     const response = await fetch('/api/todos',
+  //       {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json'
+  //         },
+  //         body: JSON.stringify(newTodo)
+  //       });
+  //     if (!response.ok) {
+  //       const message = (`An error has occurred: ${response.status}`);
+  //       throw new Error(message);
+  //     }
+  //     const origTodos = response.json();
+  //     const copyTodos = origTodos.concat(newTodo);
+  //     setTodos(copyTodos);
+  //   }
+  //   getResponse().catch(error => {
+  //     console.log(error.message);
+  //   });
+  // }, [todos.length]);
 
   // addTodo(newTodo) {
   //   /**
@@ -88,11 +102,11 @@ export default function App() {
   //     .catch(err => console.error(err));
   // }
 
-  useEffect(todoId => {
+  const toggleCompleted = todoId => {
     const findTodoIndex = todos.findIndex(todo => todo.todoId === todoId);
     const status = todos[findTodoIndex].isCompleted;
     const newStatus = { isCompleted: !status };
-    async function getResponse() {
+    const patchData = async () => {
       const response = await fetch(`api/todos/${todoId}`, {
         method: 'PATCH',
         headers: {
@@ -100,18 +114,15 @@ export default function App() {
         },
         body: JSON.stringify(todos[findTodoIndex])
       });
-      if (!response.ok) {
-        const message = (`An error has occurred: ${response.status}`);
-        throw new Error(message);
-      }
-      const foundTodo = response.json();
+      const foundTodo = await response.json();
       const newTodos = todos.slice();
       foundTodo.isCompleted = newStatus.isCompleted;
       newTodos[findTodoIndex] = foundTodo;
-      setTodos({ todos: newTodos });
-    }
-    getResponse().catch(err => err.message('Something went wrong!'));
-  }, [todos]);
+      setTodos(newTodos);
+    };
+    patchData()
+      .catch(console.error);
+  };
 
   // toggleCompleted(todoId) {
   //   /**
@@ -160,10 +171,8 @@ export default function App() {
       <div className="row">
         <div className="col pt-5">
           <PageTitle text="Todo App"/>
-          <TodoForm />
-          {/* onSubmit={this.addTodo}/> */}
-          <TodoList todos={todos} />
-          {/* toggleCompleted={this.toggleCompleted}/> */}
+          <TodoForm onSubmit={handleSubmit}/>
+          <TodoList todos={todos} toggleCompleted={toggleCompleted}/>
         </div>
       </div>
     </div>
