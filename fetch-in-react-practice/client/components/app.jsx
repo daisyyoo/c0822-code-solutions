@@ -69,7 +69,7 @@ export default function App() {
   //   });
   // }, [todos.length]);
 
-  // addTodo(newTodo) {
+  // handleSubmit(newTodo) {
   //   /**
   //   * Use fetch to send a POST request to `/api/todos`.
   //   * Then 😉, once the response JSON is received and parsed,
